@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Icon } from "antd";
 import { connect } from "react-redux";
-import SideBar from "./sideBar";
 import TopBar from "./topBar";
 import Foot from 'components/footer'
 import * as global from "pages/global/action";
@@ -9,7 +8,7 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 
 import { bindActionCreators } from "redux";
 import './style.scss';
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer } = Layout;
 @connect(
   state => ({ ...state.global }),
   dispatch => bindActionCreators({ ...global }, dispatch)
@@ -33,7 +32,7 @@ export default class MainLayout extends Component {
        <ErrorBoundary>
         <Header><TopBar location={location}  navData={navData.topNav} /></Header>
         <Layout className="top-layout">
-          <SideBar location={location}  navData={navData.sideNav}/>
+          {/* <SideBar location={location}  navData={navData.sideNav}/> */}
           <Layout>
             <div className="content">{this.props.children}</div>
             <Foot/>
