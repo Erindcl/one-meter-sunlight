@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-// import moment from "moment";
+import TypeSelect from './component/typeSelect';
+import OrderSelect from './component/orderSelect';
+import NoteList from './component/noteList';
 import "./style.scss";
 
 export default class All extends Component {
@@ -15,9 +17,14 @@ export default class All extends Component {
   render() {
     const {  }=this.state;
     return (
-      <div>
-       all page
+      <div className="all-container">
+        <TypeSelect />
+        <OrderSelect />
+        <div className="list-box">
+          <NoteList />
+        </div>
       </div>
     );
   }
 }
+ 
