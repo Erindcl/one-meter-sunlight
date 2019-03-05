@@ -20,6 +20,13 @@ export default class BaseInfor extends Component {
           <div className="user-hp-box">
             <img src={require('assets/imgs/t7.jpg')}></img>
           </div>
+          <div className="user-infor">
+            <div className="name">
+              我不知道叫啥名
+              <span>$54</span>
+            </div>
+            <div className="intro">我很懒，没得简介的，哈哈哈哈</div>
+          </div>
         </div>
       </div>
     );
