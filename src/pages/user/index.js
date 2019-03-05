@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-// import moment from "moment";
 import "./style.scss";
 
-export default class All extends Component {
+import BaseInfor from './baseInfor'
+
+export default class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +17,8 @@ export default class All extends Component {
     const {  }=this.state;
     return (
       <div>
-       all page
+        <BaseInfor />
+        个人中心
       </div>
     );
   }

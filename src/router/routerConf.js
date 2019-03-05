@@ -8,6 +8,7 @@ const Login=Loadable({loader:() => import('../pages/auth/login'),loading: Loadin
 const Register=Loadable({loader:() => import('../pages/auth/register'),loading: Loading});
 const User=Loadable({loader:() => import('../pages/user'),loading: Loading});
 const All=Loadable({loader:() => import('../pages/all'),loading: Loading});
+const Article=Loadable({loader:() => import('../pages/article'),loading: Loading});
 
 const routerConf = [
   {
@@ -24,6 +25,11 @@ const routerConf = [
     path: '/all',
     layout: MainLayout,
     component: All,
+  },
+  {
+    path: '/all/:id',
+    layout: MainLayout,
+    component: Article,
   },
   {
     path: '/user',
