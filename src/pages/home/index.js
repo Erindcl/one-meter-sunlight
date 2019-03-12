@@ -42,16 +42,43 @@ export default class Home extends Component {
             <Col span={8}>
               <div className="first-box">
                 <img src={require('assets/imgs/f4.jpg')} className="img-auto"></img>
+                <div className="mask">
+                  <div className="content-box">
+                    <p>“你在哪”</p>
+                    <p>“我还在原地，等着你”</p>
+                    <p className="small">$12</p>
+                    <p className="small">/</p>
+                    <p className="small">就是不稀饭吃青椒</p>
+                  </div>
+                </div>
               </div>
             </Col>
             <Col span={8}>
               <div className="first-box">
                 <img src={require('assets/imgs/f2.jpg')} className="img-auto"></img>
+                <div className="mask">
+                  <div className="content-box">
+                    <p>“你在哪”</p>
+                    <p>“我还在原地，等着你”</p>
+                    <p className="small">$12</p>
+                    <p className="small">/</p>
+                    <p className="small">就是不稀饭吃青椒</p>
+                  </div>
+                </div>
               </div>
             </Col>
             <Col span={8}>
               <div className="first-box">
                 <img src={require('assets/imgs/f3.jpg')} className="img-auto"></img>
+                <div className="mask">
+                  <div className="content-box">
+                    <p>“你在哪”</p>
+                    <p>“我还在原地，等着你”</p>
+                    <p className="small">$12</p>
+                    <p className="small">/</p>
+                    <p className="small">就是不稀饭吃青椒</p>
+                  </div>
+                </div>
               </div>
             </Col>
           </Row>
@@ -59,11 +86,71 @@ export default class Home extends Component {
             <Col span={12}>
               <div className="second-box">
                 <img src={require('assets/imgs/f1.jpg')} className="img-auto"></img>
+                <div className="mask">
+                  <div className="content-box">
+                    <p>“你在哪”</p>
+                    <p>“我还在原地，等着你”</p>
+                    <p className="small">$12<span>/</span>就是不稀饭吃青椒</p>
+                  </div>
+                </div>
               </div>
             </Col>
             <Col span={12}>
               <div className="second-box">
                 <img src={require('assets/imgs/f5.jpg')} className="img-auto"></img>
+                <div className="mask">
+                  <div className="content-box">
+                    <p>“你在哪”</p>
+                    <p>“我还在原地，等着你”</p>
+                    <p className="small">$12<span>/</span>就是不稀饭吃青椒</p>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
+        <div className="firend-part">
+          <Divider className="head-big">友</Divider>
+          <div className="head-small">无需过多言语，就能让人感觉温暖</div>
+          <Row gutter={16}>
+            <Col span={12}>
+              <div className="outside-box">
+                <img src={require('assets/imgs/f1.jpg')}></img>
+                <div className="text-box">
+                  <p>“你在哪”</p>
+                  <p>“我还在原地，等着你”</p>
+                  <p className="small">$12<span>/</span>就是不稀饭吃青椒</p>
+                </div>
+              </div>
+            </Col>
+            <Col span={12}>
+              <div className="outside-box">
+                <img src={require('assets/imgs/f3.jpg')}></img>
+                <div className="text-box">
+                  <p>“你在哪”</p>
+                  <p>“我还在原地，等着你”</p>
+                  <p className="small">$12<span>/</span>就是不稀饭吃青椒</p>
+                </div>
+              </div>
+            </Col>
+            <Col span={12}>
+              <div className="outside-box">
+                <img src={require('assets/imgs/f2.jpg')}></img>
+                <div className="text-box">
+                  <p>“你在哪”</p>
+                  <p>“我还在原地，等着你”</p>
+                  <p className="small">$12<span>/</span>就是不稀饭吃青椒</p>
+                </div>
+              </div>
+            </Col>
+            <Col span={12}>
+              <div className="outside-box">
+                <img src={require('assets/imgs/f5.jpg')}></img>
+                <div className="text-box">
+                  <p>“你在哪”</p>
+                  <p>“我还在原地，等着你”</p>
+                  <p className="small">$12<span>/</span>就是不稀饭吃青椒</p>
+                </div>
               </div>
             </Col>
           </Row>
