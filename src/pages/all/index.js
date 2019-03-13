@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TypeSelect from './component/typeSelect';
 import OrderSelect from './component/orderSelect';
 import NoteList from './component/noteList';
+import { API } from "@/api/index.js";
 import "./style.scss";
 
 export default class All extends Component {
@@ -12,7 +13,12 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    
+    API.getStoryList().then(response =>{ 
+      console.log(response)
+    });
+    API.getGoodList({page:1,pageSize:8,sort:-1}).then(response =>{ 
+      console.log(response)
+    });
   }
   render() {
     const {  }=this.state;

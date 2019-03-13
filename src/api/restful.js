@@ -36,5 +36,15 @@ export default {
     method:'get',
     url:'/mock/detailData.json'
   },
+
+  getStoryList:{
+    method:'get',
+    url:'/story-list'
+  },
+
+  getGoodList:{
+    method:'get',
+    url:'/goods'
+  },
   
 }

@@ -72,7 +72,7 @@ class Http {
       })
       .catch(err => {
         console.error("错误信息：",JSON.stringify(err));
-        this.handleExcept(e);//开发环境可讲此方法注视
+        // this.handleExcept(err);//开发环境可讲此方法注视
       });
   }
   handleExcept(e){
