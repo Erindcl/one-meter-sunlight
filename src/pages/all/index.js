@@ -16,9 +16,6 @@ export default class All extends Component {
     API.getStoryList().then(response =>{ 
       console.log(response)
     });
-    API.getGoodList({page:1,pageSize:8,sort:-1}).then(response =>{ 
-      console.log(response)
-    });
   }
   render() {
     const {  }=this.state;

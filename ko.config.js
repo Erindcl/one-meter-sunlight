@@ -9,6 +9,10 @@ module.exports = (context) => {
       "host": serverConfig.host,
       "port": serverConfig.port
     },
+    proxy: [{ 
+      "context": ["/app"],
+      "target": "http://localhost:2262"
+    }],
     dll:[],
     webpack: {
       entry: {},
