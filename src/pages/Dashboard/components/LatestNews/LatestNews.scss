@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.latest-news {
+  .link {
+    text-decoration: none;
+    color: red;
+    &:hover {
+      color: red;
+    }
+  }
+}

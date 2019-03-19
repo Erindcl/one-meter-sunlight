@@ -20,7 +20,7 @@ export default {
     method:'get',
     url:'/mock/searchTableData.json'
   },
-  getOptionData:{
+  getOptionNData:{
     method:'get',
     url:'/mock/optionData.json'
   },
@@ -35,6 +35,15 @@ export default {
   getDetailData:{
     method:'get',
     url:'/mock/detailData.json'
+  },
+
+  getUserListM:{
+    method:'get',
+    url:'/mock/user-list.json'
+  },
+  getTabTable:{
+    method:'get',
+    url:'/mock/tab-table.json'
   },
 
   getStoryList:{

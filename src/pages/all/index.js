@@ -13,9 +13,9 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    API.getStoryList().then(response =>{ 
-      console.log(response)
-    });
+    // API.getStoryList().then(response =>{ 
+    //   console.log(response)
+    // });
   }
   render() {
     const {  }=this.state;
