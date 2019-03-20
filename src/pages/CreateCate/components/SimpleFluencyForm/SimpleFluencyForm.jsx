@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
-import { Grid, Input, Button, Message } from '@alifd/next';
-import {
-  FormBinderWrapper,
-  FormBinder,
-  FormError,
-} from '@icedesign/form-binder';
+import { Row, Col, Input, Button, message, Card, Form } from 'antd';
 import cx from 'classnames';
 import './SimpleFluencyForm.scss';
-import styles from './index.module.scss';
+import './index.module.scss';
 
-const { Row, Col } = Grid;
-const Toast = Message;
+const FormItem = Form.Item;
 
-export default class SimpleFluencyForm extends Component {
+class SimpleFluencyForm extends Component {
   static displayName = 'SimpleFluencyForm';
 
   static propTypes = {};
@@ -30,65 +23,62 @@ export default class SimpleFluencyForm extends Component {
     };
   }
 
-  formChange = (newValue) => {
-    this.setState({
-      formValue: newValue,
-    });
-  };
-
   handleSubmit = () => {
-    this.form.validateAll((errors, values) => {
+    this.props.form.validateFields((errors, values) => {
       if (errors) {
         console.log('errors', errors);
         return;
       }
 
       console.log('values:', values);
-      Toast.success('添加成功');
+      message.success('添加成功');
     });
   };
 
   render() {
+    const { getFieldDecorator } = this.props.form;
+    const formItemLayout = {
+      labelCol: {
+        span: 4,
+      },
+      wrapperCol: {
+        span: 11,
+      },
+    };
     return (
-      <div className={cx('simple-fluency-form', styles.simpleFluencyForm)}>
-        <IceContainer className={styles.form}>
-          <FormBinderWrapper
-            ref={(form) => {
-              this.form = form;
-            }}
-            value={this.state.formValue}
-            onChange={this.formChange}
-          >
-            <div className={styles.formContent}>
-              <h2 className={styles.formTitle}>添加分类</h2>
-              <Row className={styles.formRow}>
-                <Col xxs="6" s="4" l="3" className={styles.formLabel}>
-                  <span>分类名称：</span>
-                </Col>
-                <Col xxs="16" s="10" l="6">
-                  <FormBinder name="name" required message="必填项">
-                    <Input />
-                  </FormBinder>
-                  <div className={styles.formErrorWrapper}>
-                    <FormError name="name" />
-                  </div>
+      <div className={cx('simple-fluency-form', 'simpleFluencyForm')}>
+        <Card>
+          <Form>
+            <div className={'formContent'}>
+              <h2 className={'formTitle'}>添加分类</h2>
+              <Row className={'formRow'}>
+                <Col span="15">
+                  <FormItem label="分类名称" {...formItemLayout}>
+                    {getFieldDecorator('name', {
+                      rules: [{
+                        required: true, message: '必填项',
+                      }],
+                    })(
+                      <Input placeholder="请填写分类名称" />
+                    )}
+                  </FormItem>
                 </Col>
               </Row>
-              <Row className={styles.formRow}>
-                <Col xxs="6" s="4" l="3" className={styles.formLabel}>
-                  <span>缩略名称：</span>
-                </Col>
-                <Col xxs="16" s="10" l="6">
-                  <FormBinder name="shortName" required message="必填项">
-                    <Input />
-                  </FormBinder>
-                  <div className={styles.formErrorWrapper}>
-                    <FormError name="shortName" />
-                  </div>
+              <Row className={'formRow'}>
+                <Col span="15">
+                  <FormItem label="缩略名称" {...formItemLayout}>
+                    {getFieldDecorator('shortName', {
+                      rules: [{
+                        required: true, message: '必填项',
+                      }],
+                    })(
+                      <Input placeholder="请填写缩略名称" />
+                    )}
+                  </FormItem>
                 </Col>
               </Row>
               <Row>
-                <Col offset="3">
+                <Col offset="1">
                   <Button
                     onClick={this.handleSubmit}
                     type="primary"
@@ -98,9 +88,11 @@ export default class SimpleFluencyForm extends Component {
                 </Col>
               </Row>
             </div>
-          </FormBinderWrapper>
-        </IceContainer>
+          </Form>
+        </Card>
       </div>
     );
   }
 }
+
+export default Form.create()(SimpleFluencyForm)
