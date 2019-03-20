@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Breadcrumb } from '@alifd/next';
-import IceContainer from '@icedesign/container';
+import { Breadcrumb, Card } from 'antd';
 
 export default class CustomBreadcrumb extends Component {
   static displayName = 'CustomBreadcrumb';
@@ -17,17 +16,17 @@ export default class CustomBreadcrumb extends Component {
   render() {
     const { dataSource } = this.props;
     return (
-      <IceContainer>
+      <Card style={{ marginBottom: 20 }}>
         <Breadcrumb style={{ margin: 0 }}>
           {dataSource.map((item, index) => {
             return (
-              <Breadcrumb.Item link={item.link} key={index}>
-                {item.text}
+              <Breadcrumb.Item key={index}>
+                <a href={item.link}>{item.text}</a>
               </Breadcrumb.Item>
             );
           })}
         </Breadcrumb>
-      </IceContainer>
+      </Card>
     );
   }
 }
