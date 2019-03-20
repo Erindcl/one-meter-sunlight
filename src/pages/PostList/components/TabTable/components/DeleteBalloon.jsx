@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Balloon } from '@alifd/next';
+import { Button, Popover } from 'antd';
 import PropTypes from 'prop-types';
 
 export default class DeleteBalloon extends Component {
@@ -54,20 +54,20 @@ export default class DeleteBalloon extends Component {
           id="cancelBtn"
           onClick={visible => this.handleHide(visible, 0)}
         >
-          关闭
+          取消
         </Button>
       </div>
     );
 
     return (
-      <Balloon
-        trigger={visibleTrigger}
-        triggerType="click"
+      <Popover
+        trigger="click"
         visible={this.state.visible}
         onVisibleChange={this.handleVisible}
+        content={content}
       >
-        {content}
-      </Balloon>
+        {visibleTrigger}
+      </Popover>
     );
   }
 }
