@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
-import { Grid } from '@alifd/next';
+import { Row, Col, Card } from 'antd';
 import cx from 'classnames';
 
 import './LatestNews.scss';
-import styles from './index.module.scss';
-
-const { Row, Col } = Grid;
+import './index.module.scss';
 
 const dataSource = {
   articles: [
@@ -73,50 +70,50 @@ export default class LatestNews extends Component {
 
   render() {
     return (
-      <div className={cx(styles.container, 'latest-news')}>
+      <div className={cx('container', 'latest-news')}>
         <Row wrap gutter="20">
-          <Col xxs="24" s="12" l="12">
-            <IceContainer className={styles.cardContainer}>
-              <h3 className={styles.cardTitle}>
+          <Col span={12}>
+            <Card className={'cardContainer'}>
+              <h3 className={'cardTitle'}>
                 最新文章
-                <a href="#" className={cx(styles.more, 'link')}>
+                <a href="#" className={cx('more', 'link')}>
                   更多
                 </a>
               </h3>
-              <div className={styles.items}>
+              <div className={'items'}>
                 {dataSource.articles.map((item, index) => {
                   return (
-                    <a key={index} href="#" className={cx(styles.item, 'link')}>
-                      <div className={styles.itemTitle}>{item.title}</div>
-                      <div className={styles.itemTime}>{item.time}</div>
+                    <a key={index} href="#" className={cx('item', 'link')}>
+                      <div className={'itemTitle'}>{item.title}</div>
+                      <div className={'itemTime'}>{item.time}</div>
                     </a>
                   );
                 })}
               </div>
-            </IceContainer>
+            </Card>
           </Col>
-          <Col xxs="24" s="12" l="12">
-            <IceContainer className={styles.cardContainer}>
-              <h3 className={styles.cardTitle}>
+          <Col span={12}>
+            <Card className={'cardContainer'}>
+              <h3 className={'cardTitle'}>
                 最新评论
-                <a href="#" className={cx(styles.more, 'link')}>
+                <a href="#" className={cx('more', 'link')}>
                   更多
                 </a>
               </h3>
-              <div className={styles.items}>
+              <div className={'items'}>
                 {dataSource.comments.map((item, index) => {
                   return (
-                    <a key={index} href="#" className={cx(styles.item, 'link')}>
-                      <div className={styles.itemComment}>
-                        <div className={styles.commentTitle}>{item.title}</div>
-                        <div className={styles.commentTime}>{item.time}</div>
+                    <a key={index} href="#" className={cx('item', 'link')}>
+                      <div className={'itemComment'}>
+                        <div className={'commentTitle'}>{item.title}</div>
+                        <div className={'commentTime'}>{item.time}</div>
                       </div>
-                      <div className={styles.commentNum}>{item.num}</div>
+                      <div className={'commentNum'}>{item.num}</div>
                     </a>
                   );
                 })}
               </div>
-            </IceContainer>
+            </Card>
           </Col>
         </Row>
       </div>
