@@ -16,7 +16,7 @@ export default class BasicLayout extends Component {
           <Content className="layout-section">
             <Layout className="inner-layout">
               <Sider>
-                <Aside />
+                <Aside location={this.props.location} />
               </Sider>
               <Content className="layout-main">
                 {this.props.children}

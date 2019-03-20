@@ -48,7 +48,7 @@ const asideMenuConfig = [
   {
     name: '分类管理',
     path: '/cate',
-    icon: 'cascades',
+    icon: 'appstore',
     children: [
       { name: '分类列表', path: '/cate/list' },
       { name: '添加分类', path: '/cate/create' },
@@ -57,7 +57,7 @@ const asideMenuConfig = [
   {
     name: '标签管理',
     path: '/tag',
-    icon: 'pin',
+    icon: 'pushpin',
     children: [
       { name: '标签列表', path: '/tag/list' },
       { name: '添加标签', path: '/tag/create' },
@@ -66,7 +66,7 @@ const asideMenuConfig = [
   {
     name: '用户管理',
     path: '/users',
-    icon: 'yonghu',
+    icon: 'user',
     children: [
       { name: '用户列表', path: '/users/list' },
       { name: '添加用户', path: '/users/create' },
@@ -76,7 +76,7 @@ const asideMenuConfig = [
   {
     name: '通用设置',
     path: '/setting',
-    icon: 'shezhi',
+    icon: 'setting',
     children: [
       { name: '基础设置', path: '/setting/basic' },
       {

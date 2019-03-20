@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
 import cx from 'classnames';
-import FoundationSymbol from '@icedesign/foundation-symbol';
-import { Nav } from '@alifd/next';
+import { Menu, Icon } from 'antd';
 import Logo from '../Logo';
 import { asideMenuConfig } from '../../../../menuConfig';
 import './scss/base.scss';
 
-const Icon = FoundationSymbol;
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
-@withRouter
 export default class Aside extends Component {
   static propTypes = {};
 
@@ -55,7 +53,7 @@ export default class Aside extends Component {
     let openKeys = [];
     if (Array.isArray(menus)) {
       asideMenuConfig.forEach((item, index) => {
-        if (pathname.startsWith(item.path)) {
+        if (pathname && pathname.startsWith(item.path)) {
           openKeys = [`${index}`];
         }
       });
@@ -98,63 +96,51 @@ export default class Aside extends Component {
 
       if (childrenItems && childrenItems.length > 0) {
         return (
-          <Nav.SubNav
-            key={index}
-            label={
-              <span>
-                {item.icon ? (
-                  <FoundationSymbol size="small" type={item.icon} />
-                ) : null}
-                <span className="ice-menu-collapse ice-menu-collapse-hide">
-                  {item.name}
-                </span>
+          <SubMenu key={index} title={
+            <span>
+              {item.icon ? (
+                <Icon size="small" type={item.icon} />
+              ) : null}
+              <span className="ice-menu-collapse ice-menu-collapse-hide">
+                {item.name}
               </span>
-            }
-          >
+            </span>
+          }>
             {childrenItems}
-          </Nav.SubNav>
+          </SubMenu>
         );
       }
       return null;
     }
     return (
-      <Nav.Item key={item.path}>
+      <Menu.Item key={item.path}>
         <Link to={item.path}>{item.name}</Link>
-      </Nav.Item>
+      </Menu.Item>
     );
   };
 
   render() {
     const { openDrawer } = this.state;
     const {
-      location: { pathname },
-      isMobile,
+      location: { pathname }
     } = this.props;
 
     return (
       <div
-        className={cx('ice-design-layout-aside', { 'open-drawer': openDrawer })}
+        className={cx('layout-aside', { 'open-drawer': openDrawer }, 'side-menu-box')}
       >
-        {isMobile && <Logo />}
-
-        {isMobile && !openDrawer && (
-          <a className="menu-btn" onClick={this.toggleMenu}>
-            <Icon type="category" size="small" />
-          </a>
-        )}
-
-        <Nav
+        <Menu
           style={{ width: 200 }}
-          mode="inline"
           selectedKeys={[pathname]}
           openKeys={this.state.openKeys}
           defaultSelectedKeys={[pathname]}
           onClick={this.onMenuClick}
-          onOpen={this.onOpenChange}
-          type="secondary"
+          onOpenChange={this.onOpenChange}
+          mode="inline"
+          theme="dark"
         >
           {this.getNavMenuItems(asideMenuConfig)}
-        </Nav>
+        </Menu>
       </div>
     );
   }

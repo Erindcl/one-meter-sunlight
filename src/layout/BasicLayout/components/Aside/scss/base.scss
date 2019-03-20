@@ -1,50 +1,16 @@
-.ice-layout {
-  .ice-layout-aside {
-    background-color: transparent !important;
-
-    .next-nav {
-      background-color: transparent !important;
-      .next-nav-item {
-        background-color: transparent !important;
-        border-radius: 50%;
-        &.next-open {
-          background-color: transparent !important;
-        }
-        &.next-selected {
-          background-color: red !important;
-          &::before {
-            display: none;
-          }
-        }
-      }
-    }
-    i ~ .ice-menu-collapse {
-      margin-left: 5px;
-    }
+.side-menu-box {
+  .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+    background: rgba(0,0,0,0);
   }
-
-  .menu-btn {
-    position: fixed;
-    left: 0;
-    top: 82px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 0 6px 6px 0;
-    color: #fff;
-    background: #2077ff;
-    text-align: center;
-    cursor: pointer;
-    z-index: 9;
-    text-decoration: none;
-    &:hover {
-      color: #e7e7e7;
-    }
+  .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    background: rgba(0,0,0,0);
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0) inset;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0) inset;
   }
 }
 
 @media screen and (max-width: 1199px) {
-  .ice-design-layout-aside {
+  .layout-aside {
     position: fixed;
     left: -256px;
     top: 0px;
