@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
-import { Input, Grid, Form, Button, Select, Message } from '@alifd/next';
-import {
-  FormBinderWrapper as IceFormBinderWrapper,
-  FormBinder as IceFormBinder,
-  FormError as IceFormError,
-} from '@icedesign/form-binder';
+import { Input, Row, Col, Form, Button, Select, message, Card } from 'antd';
 
 import RichEditor from './RichEditor';
 
-const { Row, Col } = Grid;
 const FormItem = Form.Item;
 
-export default class ContentEditor extends Component {
+class ContentEditor extends Component {
   static displayName = 'ContentEditor';
 
   static propTypes = {};
@@ -29,124 +22,107 @@ export default class ContentEditor extends Component {
         body: null,
         cats: [],
       },
+      content: ''
     };
   }
 
-  formChange = (value) => {
-    console.log('value', value);
-    this.setState({
-      value,
-    });
-  };
-
   handleSubmit = () => {
-    this.postForm.validateAll((errors, values) => {
+    this.props.form.validateFields((errors, values) => {
       console.log('errors', errors, 'values', values);
       if (errors) {
         return false;
       }
-
-      Message.success('提交成功');
+      console.log(this.state.content)
+      console.log(values)
+      message.success('提交成功');
     });
   };
 
+  setContentValue = (value) => {
+    this.setState({content: value})
+  }
+
   render() {
+    const { getFieldDecorator } = this.props.form;
+    const SelectOption = [
+      { label: '分类1', value: 'cat1' },
+      { label: '分类2', value: 'cat2' },
+      { label: '分类3', value: 'cat3' },
+    ];
     return (
       <div className="content-editor">
-        <IceFormBinderWrapper
-          ref={(refInstance) => {
-            this.postForm = refInstance;
-          }}
-          value={this.state.value}
-          onChange={this.formChange}
-        >
-          <IceContainer>
+        <Form>
+          <Card>
             <h2 style={styles.title}>添加文章</h2>
             <Form labelAlign="top" style={styles.form}>
               <Row>
                 <Col span="11">
-                  <FormItem label="标题" required>
-                    <IceFormBinder name="title" required message="标题必填">
+                  <FormItem label="标题">
+                    {getFieldDecorator('title', {
+                      rules: [{
+                        required: true, message: '标题必填',
+                      }],
+                    })(
                       <Input placeholder="这里填写文章标题" />
-                    </IceFormBinder>
-                    <IceFormError name="title" />
+                    )}
                   </FormItem>
                 </Col>
               </Row>
               <Row>
                 <Col span="11">
-                  <FormItem label="作者" required>
-                    <IceFormBinder
-                      name="author"
-                      required
-                      message="作者信息必填"
-                    >
+                  <FormItem label="作者">
+                    {getFieldDecorator('author', {
+                      rules: [{
+                        required: true, message: '作者信息必填',
+                      }],
+                    })(
                       <Input placeholder="填写作者名称" />
-                    </IceFormBinder>
-                    <IceFormError name="author" />
+                    )}
                   </FormItem>
                 </Col>
                 <Col span="11" offset="2">
-                  <FormItem label="分类" required>
-                    <IceFormBinder
-                      name="cats"
-                      required
-                      type="array"
-                      message="分类必填支持多个"
-                    >
-                      <Select
+                  <Form.Item label="分类">
+                    {getFieldDecorator('cats', {
+                      rules: [{
+                        required: true, message: '分类必选',
+                      }],
+                    })(
+                      <Select 
+                        placeholder="请选择分类"
                         style={styles.cats}
                         mode="multiple"
-                        placeholder="请选择分类"
-                        dataSource={[
-                          { label: '分类1', value: 'cat1' },
-                          { label: '分类2', value: 'cat2' },
-                          { label: '分类3', value: 'cat3' },
-                        ]}
-                      />
-                    </IceFormBinder>
-                    <IceFormError
-                      name="cats"
-                      render={(errors) => {
-                        console.log('errors', errors);
-                        return (
-                          <div>
-                            <span style={{ color: 'red' }}>
-                              {errors.map(item => item.message).join(',')}
-                            </span>
-                            <span style={{ marginLeft: 10 }}>
-                              不知道选择什么分类？请 <a href="#">点击这里</a>{' '}
-                              查看
-                            </span>
-                          </div>
-                        );
-                      }}
-                    />
-                  </FormItem>
+                      >
+                        {SelectOption.map((item,index) => (
+                          <Option key={index} value={item.value}>{item.label}</Option>
+                        ))}
+                      </Select>
+                    )}
+                  </Form.Item>
                 </Col>
               </Row>
               <FormItem label="描述">
-                <IceFormBinder name="desc">
-                  <Input.TextArea placeholder="这里填写正文描述" />
-                </IceFormBinder>
+                {getFieldDecorator('describ', {})(
+                  <Input.TextArea placeholder="这里填写正文描述">
+                  </Input.TextArea>
+                )}
               </FormItem>
-              <FormItem label="正文" required>
-                <IceFormBinder name="body">
-                  <RichEditor />
-                </IceFormBinder>
+              <FormItem label="正文">
+                <RichEditor onChange={this.setContentValue} />
               </FormItem>
-              <FormItem label=" ">
+              <FormItem>
                 <Button type="primary" onClick={this.handleSubmit}>
                   发布文章
                 </Button>
               </FormItem>
             </Form>
-          </IceContainer>
-        </IceFormBinderWrapper>
+          </Card>
+        </Form>
       </div>
     );
   }
 }
+
+export default Form.create()(ContentEditor)
 
 const styles = {
   title: {

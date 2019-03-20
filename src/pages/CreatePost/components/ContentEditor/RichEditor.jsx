@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
+import { Card } from 'antd';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import { isKeyHotkey } from 'is-hotkey';
@@ -184,7 +184,7 @@ export default class RichEditor extends Component {
   render() {
     return (
       <div className="rich-editor">
-        <IceContainer>
+        <Card>
           <div>
             <div className="rich-editor-menu rich-editor-toolbar-menu">
               {this.renderMarkButton('bold', 'format_bold')}
@@ -200,7 +200,7 @@ export default class RichEditor extends Component {
             <div className="rich-editor-body">
               <Editor
                 style={styles.editor}
-                placeholder="请编写一些内容..."
+                placeholder="请输入文章内容..."
                 value={this.state.value}
                 onChange={this.onChange}
                 onKeyDown={this.onKeyDown}
@@ -210,7 +210,7 @@ export default class RichEditor extends Component {
               />
             </div>
           </div>
-        </IceContainer>
+        </Card>
       </div>
     );
   }
