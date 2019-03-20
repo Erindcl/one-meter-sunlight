@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { Grid } from '@alifd/next';
-import IceContainer from '@icedesign/container';
+import { Row, Col, Card } from 'antd';
 import { Chart, Axis, Geom, Tooltip } from 'bizcharts';
-import styles from './index.module.scss';
-
-const { Row, Col } = Grid;
 
 const dataSource = {
   chartData: [
@@ -97,10 +93,10 @@ export default class DataStatistics extends Component {
     };
 
     return (
-      <IceContainer>
-        <h4 className={styles.title}>用户活跃趋势</h4>
+      <Card style={{ width: '100%', marginBottom: '20px' }}>
+        <h4 style={styles.title}>用户活跃趋势</h4>
         <Row wrap>
-          <Col xxs="24" l="16">
+          <Col span={16}>
             <Chart
               height={300}
               padding={[40, 10, 40, 35]}
@@ -114,12 +110,12 @@ export default class DataStatistics extends Component {
               <Geom type="interval" position="month*users" />
             </Chart>
           </Col>
-          <Col xxs="24" l="8">
-            <ul className={styles.items}>
+          <Col span={8}>
+            <ul style={styles.items}>
               {dataSource.statisticData.map((item, index) => {
                 return (
-                  <li key={index} className={styles.itemBox}>
-                    <div className={styles.itemIcon}>
+                  <li key={index} style={styles.itemBox}>
+                    <div style={styles.itemIcon}>
                       <img
                         src={item.img.url}
                         style={{
@@ -129,9 +125,9 @@ export default class DataStatistics extends Component {
                         alt=""
                       />
                     </div>
-                    <div className={styles.itemText}>
-                      <div className={styles.name}>{item.name}</div>
-                      <div className={styles.value}>{item.value}</div>
+                    <div style={styles.itemText}>
+                      <div style={styles.name}>{item.name}</div>
+                      <div style={styles.value}>{item.value}</div>
                     </div>
                   </li>
                 );
@@ -139,7 +135,47 @@ export default class DataStatistics extends Component {
             </ul>
           </Col>
         </Row>
-      </IceContainer>
+      </Card>
     );
+  }
+}
+
+const styles = {
+  container: {
+    width: '100%',
+  },
+  title: {
+    color: '#333',
+    margin: 0,
+    fontSize: '16px',
+    fontWeight: 'bold',
+    borderBottom: '1px solid #eee',
+    paddingBottom: '15px',
+  },
+  items: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginLeft: '30px',
+    flexDirection: 'row',
+  },
+  itemBox: {
+    width: '50%',
+    display: 'flex',
+    marginTop: '50px',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  itemIcon: {
+    marginRight: '10px',
+  },
+  icon: {
+    color: 'gray',
+  },
+  value: {
+    color: 'red',
+    fontSize: '20px',
+  },
+  name: {
+    fontSize: '12px',
   }
 }
