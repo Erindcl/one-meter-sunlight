@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
-import { Tab } from '@alifd/next';
+import { Tabs , Card, Table } from 'antd';
 import { API } from "@/api/index.js";
-import CustomTable from './components/CustomTable';
 import EditDialog from './components/EditDialog';
 import DeleteBalloon from './components/DeleteBalloon';
 
-const TabPane = Tab.Item;
+const TabPane = Tabs.TabPane;
 
 const tabs = [
   { tab: '全部', key: 'all' },
@@ -22,13 +20,44 @@ export default class TabTable extends Component {
 
   static defaultProps = {};
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: {},
-      tabKey: 'all',
-    };
-    this.columns = [
+  state = {
+    dataSource: {},
+    tabKey: 'all',
+  };
+
+  componentDidMount() {
+    API.getTabTable().then(response =>{ 
+      this.setState({
+        dataSource: response.data,
+      });
+    });
+  }
+
+  getFormValues = (dataIndex, values) => {
+    const { dataSource, tabKey } = this.state;
+    dataSource[tabKey][dataIndex] = values;
+    this.setState({
+      dataSource,
+    });
+  };
+
+  handleRemove = (value, index) => {
+    const { dataSource, tabKey } = this.state;
+    dataSource[tabKey].splice(index, 1);
+    this.setState({
+      dataSource,
+    });
+  };
+
+  handleTabChange = (key) => {
+    this.setState({
+      tabKey: key,
+    });
+  };
+
+  render() {
+    const { dataSource } = this.state;
+    const columns = [
       {
         title: '标题',
         dataIndex: 'title',
@@ -73,57 +102,20 @@ export default class TabTable extends Component {
         },
       },
     ];
-  }
 
-  componentDidMount() {
-    API.getTabTable(params).then(response =>{ 
-      this.setState({
-        dataSource: response.data.data,
-      });
-    });
-  }
-
-  getFormValues = (dataIndex, values) => {
-    const { dataSource, tabKey } = this.state;
-    dataSource[tabKey][dataIndex] = values;
-    this.setState({
-      dataSource,
-    });
-  };
-
-  handleRemove = (value, index) => {
-    const { dataSource, tabKey } = this.state;
-    dataSource[tabKey].splice(index, 1);
-    this.setState({
-      dataSource,
-    });
-  };
-
-  handleTabChange = (key) => {
-    this.setState({
-      tabKey: key,
-    });
-  };
-
-  render() {
-    const { dataSource } = this.state;
     return (
       <div className="tab-table">
-        <IceContainer style={{ padding: '0 20px 20px' }}>
-          <Tab onChange={this.handleTabChange}>
+        <Card>
+          <Tabs onChange={this.handleTabChange}>
             {tabs.map((item) => {
               return (
-                <TabPane title={item.tab} key={item.key}>
-                  <CustomTable
-                    dataSource={dataSource[this.state.tabKey]}
-                    columns={this.columns}
-                    hasBorder={false}
-                  />
+                <TabPane tab={item.tab} key={item.key}>
+                  <Table columns={columns} dataSource={dataSource[this.state.tabKey]} />
                 </TabPane>
               );
             })}
-          </Tab>
-        </IceContainer>
+          </Tabs>
+        </Card>
       </div>
     );
   }

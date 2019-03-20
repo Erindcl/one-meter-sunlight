@@ -14,6 +14,8 @@ const Article=Loadable({loader:() => import('../pages/article'),loading: Loading
 
 // 后台管理
 const Dashboard = Loadable({loader:() => import('../pages/Dashboard'),loading: Loading});
+const PostList = Loadable({loader:() => import('../pages/PostList'),loading: Loading});
+const CreatePost = Loadable({loader:() => import('../pages/CreatePost'),loading: Loading});
 
 const routerConf = [
   {
@@ -41,6 +43,7 @@ const routerConf = [
     layout: MainLayout,
     component: User,
   },
+
   {
    path:'/login',
    layout: UserLayout,
@@ -56,6 +59,17 @@ const routerConf = [
     layout: BasicLayout,
     component: Dashboard,
   },
+  {
+    path: '/post/list',
+    layout: BasicLayout,
+    component: PostList,
+  },
+  {
+    path: '/post/create',
+    layout: BasicLayout,
+    component: CreatePost,
+  },
+
 	{
 		path: '*',
     layout: null,

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Dialog, Button, Form, Input, Field } from '@alifd/next';
+import { Modal, Button, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
-export default class EditDialog extends Component {
+class EditDialog extends Component {
   static displayName = 'EditDialog';
 
   static defaultProps = {};
@@ -14,11 +14,10 @@ export default class EditDialog extends Component {
       visible: false,
       dataIndex: null,
     };
-    this.field = new Field(this);
   }
 
   handleSubmit = () => {
-    this.field.validate((errors, values) => {
+    this.props.form.validateFields((errors, values) => {
       if (errors) {
         console.log('Errors in form!!!');
         return;
@@ -33,7 +32,7 @@ export default class EditDialog extends Component {
   };
 
   onOpen = (index, record) => {
-    this.field.setValues({ ...record });
+    this.props.form.setFieldsValue({ ...record });
     this.setState({
       visible: true,
       dataIndex: index,
@@ -47,11 +46,11 @@ export default class EditDialog extends Component {
   };
 
   render() {
-    const init = this.field.init;
+    const { getFieldDecorator } = this.props.form;
     const { index, record } = this.props;
     const formItemLayout = {
       labelCol: {
-        fixedSpan: 6,
+        span: 6,
       },
       wrapperCol: {
         span: 14,
@@ -60,56 +59,66 @@ export default class EditDialog extends Component {
 
     return (
       <div style={styles.editDialog}>
-        <Button type="primary" onClick={() => this.onOpen(index, record)}>
+        <Button type="primary" onClick={() => this.onOpen(record, index)}>
           编辑
         </Button>
-        <Dialog
+        <Modal
+          title="编辑"
           style={{ width: 640 }}
           visible={this.state.visible}
           onOk={this.handleSubmit}
-          closeable="esc,mask,close"
           onCancel={this.onClose}
-          onClose={this.onClose}
-          title="编辑"
+          okText="确认"
+          cancelText="取消"
         >
-          <Form field={this.field}>
+          <Form>
             <FormItem label="标题：" {...formItemLayout}>
-              <Input
-                {...init('title', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+              {getFieldDecorator('title', {
+                rules: [{
+                  required: true, message: '必填选项',
+                }],
+              })(
+                <Input />
+              )}
             </FormItem>
 
             <FormItem label="作者：" {...formItemLayout}>
-              <Input
-                {...init('author', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+              {getFieldDecorator('author', {
+                rules: [{
+                  required: true, message: '必填选项',
+                }],
+              })(
+                <Input />
+              )}
             </FormItem>
 
             <FormItem label="状态：" {...formItemLayout}>
-              <Input
-                {...init('status', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+              {getFieldDecorator('status', {
+                rules: [{
+                  required: true, message: '必填选项',
+                }],
+              })(
+                <Input />
+              )}
             </FormItem>
 
             <FormItem label="发布时间：" {...formItemLayout}>
-              <Input
-                {...init('date', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+              {getFieldDecorator('date', {
+                rules: [{
+                  required: true, message: '必填选项',
+                }],
+              })(
+                <Input />
+              )}
             </FormItem>
           </Form>
-        </Dialog>
+        </Modal>
       </div>
     );
   }
 }
+
+export default Form.create()(EditDialog)
 
 const styles = {
   editDialog: {
