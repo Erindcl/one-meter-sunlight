@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
-import CustomTable from './components/CustomTable';
+import { Card, Table } from 'antd';
 import EditDialog from './components/EditDialog';
 import DeleteBalloon from './components/DeleteBalloon';
 
@@ -119,13 +118,9 @@ export default class TabTable extends Component {
   render() {
     return (
       <div className="tab-table">
-        <IceContainer>
-          <CustomTable
-            dataSource={this.state.dataSource}
-            columns={this.columns}
-            hasBorder={false}
-          />
-        </IceContainer>
+        <Card>
+          <Table columns={this.columns} dataSource={this.state.dataSource} />
+        </Card>
       </div>
     );
   }

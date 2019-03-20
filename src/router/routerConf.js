@@ -16,6 +16,8 @@ const Article=Loadable({loader:() => import('../pages/article'),loading: Loading
 const Dashboard = Loadable({loader:() => import('../pages/Dashboard'),loading: Loading});
 const PostList = Loadable({loader:() => import('../pages/PostList'),loading: Loading});
 const CreatePost = Loadable({loader:() => import('../pages/CreatePost'),loading: Loading});
+const CateList = Loadable({loader:() => import('../pages/CateList'),loading: Loading});
+const CreateCate = Loadable({loader:() => import('../pages/CreateCate'),loading: Loading});
 
 const routerConf = [
   {
@@ -68,6 +70,16 @@ const routerConf = [
     path: '/post/create',
     layout: BasicLayout,
     component: CreatePost,
+  },
+  {
+    path: '/cate/list',
+    layout: BasicLayout,
+    component: CateList,
+  },
+  {
+    path: '/cate/create',
+    layout: BasicLayout,
+    component: CreateCate,
   },
 
 	{
