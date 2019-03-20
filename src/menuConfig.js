@@ -31,15 +31,6 @@ const asideMenuConfig = [
     ],
   },
   {
-    name: '标签管理',
-    path: '/tag',
-    icon: 'pushpin',
-    children: [
-      { name: '标签列表', path: '/tag/list' },
-      { name: '添加标签', path: '/tag/create' },
-    ],
-  },
-  {
     name: '用户管理',
     path: '/users',
     icon: 'user',
