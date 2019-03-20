@@ -1,9 +1,8 @@
 import Loadable from 'react-loadable';
 import Loading from 'components/loading';
-import TopLayout  from 'layout/topLayout';
 import MainLayout  from 'layout/mainLayout';
 import UserLayout from 'layout/UserLayout';
-// import BasicLayout from 'layout/BasicLayout';
+import BasicLayout from 'layout/BasicLayout';
 
 const Home = Loadable({loader: () => import('../pages/home'),loading: Loading});
 const Page404 = Loadable({loader: () => import('../pages/error/404'),loading: Loading});
@@ -12,6 +11,9 @@ const Register=Loadable({loader:() => import('../pages/UserRegister'),loading: L
 const User=Loadable({loader:() => import('../pages/user'),loading: Loading});
 const All=Loadable({loader:() => import('../pages/all'),loading: Loading});
 const Article=Loadable({loader:() => import('../pages/article'),loading: Loading});
+
+// 后台管理
+const Dashboard = Loadable({loader:() => import('../pages/Dashboard'),loading: Loading});
 
 const routerConf = [
   {
@@ -49,22 +51,32 @@ const routerConf = [
     layout: UserLayout,
     component: Register,
   },
-	{
-		path: '*',
-    layout: TopLayout,
-    component: Page404,
-  },
   // {
   //   path: '/manager',
   //   layout: BasicLayout,
   //   children:[
   //     {
-  //       path:'/register',
+  //       path:'/dashboard',
   //       layout: null,
-  //       component: Register,
+  //       component: Dashboard,
   //     },
   //   ]
   // },
+  {
+    path:'/dashboard/monitor',
+    layout: BasicLayout,
+    component: Dashboard,
+  },
+	{
+		path: '*',
+    layout: null,
+    component: Page404,
+  },
+  // {
+  //   path:'/manager',
+  //   layout: null,
+  //   component: BasicLayout,
+  // }
 ];
 
 
