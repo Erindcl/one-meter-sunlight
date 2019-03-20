@@ -1,13 +1,7 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Input, Button, Message } from 'antd';
-import {
-  FormBinderWrapper as IceFormBinderWrapper,
-  FormBinder as IceFormBinder,
-  FormError as IceFormError,
-} from '@icedesign/form-binder';
-import IceIcon from '@icedesign/foundation-symbol';
+import { Form, Input, Button, message, Icon } from 'antd';
 
 class UserRegister extends Component {
   static displayName = 'UserRegister';
@@ -30,7 +24,7 @@ class UserRegister extends Component {
 
   checkPasswd = (rule, values, callback) => {
     if (!values) {
-      callback('请输入正确的密码');
+      callback('请输入密码');
     } else if (values.length < 8) {
       callback('密码必须大于8位');
     } else if (values.length > 16) {
@@ -40,109 +34,98 @@ class UserRegister extends Component {
     }
   };
 
-  checkPasswd2 = (rule, values, callback, stateValues) => {
-    if (!values) {
-      callback('请输入正确的密码');
-    } else if (values && values !== stateValues.passwd) {
-      callback('两次输入密码不一致');
-    } else {
-      callback();
+  handleConfirmPassword = (rule, value, callback) => {
+    const { getFieldValue } = this.props.form
+    if (value && value !== getFieldValue('newPassword')) {
+        callback('两次输入不一致！')
     }
-  };
-
-  formChange = (value) => {
-    this.setState({
-      value,
-    });
-  };
+    callback()
+  }
 
   handleSubmit = () => {
-    this.refs.form.validateAll((errors, values) => {
+    this.props.form.validateFields((errors, values) => {
       if (errors) {
         console.log('errors', errors);
         return;
       }
-      console.log(values);
-      Message.success('注册成功');
+      message.success('注册成功');
       this.props.history.push('/login');
     });
   };
 
   render() {
+    const { getFieldDecorator } = this.props.form;
     return (
       <div style={styles.container}>
         <h4 style={styles.title}>注 册</h4>
-        <IceFormBinderWrapper
-          value={this.state.value}
-          onChange={this.formChange}
-          ref="form"
-        >
+        <Form>
           <div style={styles.formItems}>
-            <div style={styles.formItem}>
-              <IceIcon type="person" size="small" style={styles.inputIcon} />
-              <IceFormBinder name="name" required message="请输入正确的用户名">
+            <Form.Item style={styles.formItem}>
+              {getFieldDecorator('username', {
+                rules: [{
+                  required: true, message: '请输入正确的用户名',
+                }],
+              })(
                 <Input
+                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   size="large"
+                  maxLength={20}
                   placeholder="用户名"
                   style={styles.inputCol}
                 />
-              </IceFormBinder>
-              <IceFormError name="name" />
-            </div>
+              )}
+            </Form.Item>
 
-            <div style={styles.formItem}>
-              <IceIcon type="mail" size="small" style={styles.inputIcon} />
-              <IceFormBinder
-                type="email"
-                name="email"
-                required
-                message="请输入正确的邮箱"
-              >
+            <Form.Item style={styles.formItem}>
+              {getFieldDecorator('email', {
+                rules: [{
+                  required: true, message: '请输入正确的邮箱', type: 'email'
+                }],
+              })(
                 <Input
+                  prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   size="large"
                   maxLength={20}
                   placeholder="邮箱"
                   style={styles.inputCol}
                 />
-              </IceFormBinder>
-              <IceFormError name="email" />
-            </div>
+              )}
+            </Form.Item>
 
-            <div style={styles.formItem}>
-              <IceIcon type="lock" size="small" style={styles.inputIcon} />
-              <IceFormBinder
-                name="passwd"
-                required
-                validator={this.checkPasswd}
-              >
+            <Form.Item style={styles.formItem}>
+              {getFieldDecorator('newPassword', {
+                rules: [{
+                  validator: this.checkPasswd
+                }],
+              })(
                 <Input
-                  htmlType="password"
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   size="large"
-                  placeholder="至少8位密码"
+                  type="password"
+                  placeholder="密码"
                   style={styles.inputCol}
                 />
-              </IceFormBinder>
-              <IceFormError name="passwd" />
-            </div>
+              )}
+            </Form.Item>
 
-            <div style={styles.formItem}>
-              <IceIcon type="lock" size="small" style={styles.inputIcon} />
-              <IceFormBinder
-                name="rePasswd"
-                required
-                validator={(rule, values, callback) =>
-                  this.checkPasswd2(rule, values, callback, this.state.value)
-                }
-              >
+            <Form.Item style={styles.formItem}>
+              {getFieldDecorator('passwordConfirm', {
+                rules: [{
+                  required: true,
+                  message: '请再次输入以确认新密码',
+                }, {
+                      validator: this.handleConfirmPassword
+                }],
+              })(
                 <Input
-                  htmlType="password"
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   size="large"
+                  type="password"
                   placeholder="确认密码"
                   style={styles.inputCol}
                 />
-              </IceFormBinder>
-              <IceFormError name="rePasswd" />
-            </div>
+              )}
+            </Form.Item>
 
             <div className="footer">
               <Button
@@ -158,7 +141,7 @@ class UserRegister extends Component {
               </Link>
             </div>
           </div>
-        </IceFormBinderWrapper>
+        </Form>
       </div>
     );
   }
@@ -190,7 +173,6 @@ const styles = {
   },
   inputCol: {
     width: '100%',
-    paddingLeft: '20px',
   },
   submitBtn: {
     width: '100%',
@@ -202,4 +184,4 @@ const styles = {
   },
 };
 
-export default UserRegister;
+export default Form.create()(UserRegister);

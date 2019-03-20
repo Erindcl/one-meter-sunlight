@@ -20,12 +20,6 @@ class UserLogin extends Component {
     };
   }
 
-  formChange = (value) => {
-    this.setState({
-      value,
-    });
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((errors, values) => {
@@ -33,7 +27,6 @@ class UserLogin extends Component {
         console.log('errors', errors);
         return;
       }
-      console.log(values);
       message.success('登录成功');
       // this.props.history.push('/');
     });
@@ -62,18 +55,6 @@ class UserLogin extends Component {
                   />
                 )}
               </Form.Item>
-            {/* <div style={styles.formItem}>
-              <IceIcon type="person" size="small" style={styles.inputIcon} />
-              <IceFormBinder name="username" required message="必填">
-                <Input
-                  size="large"
-                  maxLength={20}
-                  placeholder="用户名"
-                  style={styles.inputCol}
-                />
-              </IceFormBinder>
-              <IceFormError name="username" />
-            </div> */}
             <Form.Item style={styles.formItem}>
               {getFieldDecorator('password', {
                 rules: [{
@@ -89,23 +70,9 @@ class UserLogin extends Component {
                 />
               )}
             </Form.Item>
-            {/* <div style={styles.formItem}>
-              <IceIcon type="lock" size="small" style={styles.inputIcon} />
-              <IceFormBinder name="password" required message="必填">
-                <Input
-                  size="large"
-                  htmlType="password"
-                  placeholder="密码"
-                  style={styles.inputCol}
-                />
-              </IceFormBinder>
-              <IceFormError name="password" />
-            </div> */}
 
             <div style={styles.formItem}>
-              {/* <IceFormBinder name="checkbox"> */}
-                <Checkbox style={styles.checkbox}>记住账号</Checkbox>
-              {/* </IceFormBinder> */}
+              <Checkbox style={styles.checkbox}>记住账号</Checkbox>
             </div>
 
             <div style={styles.footer}>
