@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
-import { enquireScreen } from 'enquire-js';
-import { Balloon, Icon, Grid } from '@alifd/next';
-import styles from './index.module.scss';
-
-const { Row, Col } = Grid;
+import { Popover, Icon, Row, Col, Card } from 'antd';
 
 const dataSource = [
   {
@@ -39,50 +34,31 @@ export default class StatisticalCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMobile: false,
     };
   }
 
   componentDidMount() {
-    this.enquireScreenRegister();
+    
   }
 
-  enquireScreenRegister = () => {
-    const mediaCondition = 'only screen and (max-width: 720px)';
-
-    enquireScreen((mobile) => {
-      this.setState({
-        isMobile: mobile,
-      });
-    }, mediaCondition);
-  };
-
   renderItem = () => {
-    const itemStyle = this.state.isMobile ? { justifyContent: 'left' } : {};
     return dataSource.map((data, idx) => {
       return (
-        <Col xxs="24" s="12" l="6" key={idx}>
-          <div className={styles.statisticalCardItem} style={itemStyle}>
-            <div className={styles.circleWrap}>
-              <img src={data.imgUrl} className={styles.imgStyle} alt="图片" />
+        <Col span={6} key={idx}>
+          <div style={styles.statisticalCardItem}>
+            <div style={styles.circleWrap}>
+              <img src={data.imgUrl} style={styles.imgStyle} alt="图片" />
             </div>
-            <div className={styles.statisticalCardDesc}>
-              <div className={styles.statisticalCardText}>
+            <div style={styles.statisticalCardDesc}>
+              <div style={styles.statisticalCardText}>
                 {data.text}
-                <Balloon
-                  align="t"
-                  alignEdge
-                  trigger={
+                <Popover content={data.desc}>
                     <span>
-                      <Icon type="help" className={styles.helpIcon} size="xs" />
+                      <Icon type="question-circle" style={styles.helpIcon} size="xs" />
                     </span>
-                  }
-                  closable={false}
-                >
-                  {data.desc}
-                </Balloon>
+                </Popover>
               </div>
-              <div className={styles.statisticalCardNumber}>{data.number}</div>
+              <div style={styles.statisticalCardNumber}>{data.number}</div>
             </div>
           </div>
         </Col>
@@ -92,9 +68,63 @@ export default class StatisticalCard extends Component {
 
   render() {
     return (
-      <IceContainer className={styles.container}>
+      <Card style={styles.container}>
         <Row wrap>{this.renderItem()}</Row>
-      </IceContainer>
+      </Card>
     );
   }
+}
+
+const styles = {
+  container: {
+    padding: '10px 20px',
+    width: '100%',
+    margin: '0px 0px 20px'
+  },
+  statisticalCardItem: {
+    display: 'flex',
+    padding: '10px 0',
+    justifyContent: 'center',
+  },
+  circleWrap: {
+    width: '70px',
+    height: '70px',
+    display: 'flex',
+    position: 'relative',
+    alignItems: 'center',
+    marginRight: '10px',
+    borderRadius: '50%',
+    justifyContent: 'center',
+  },
+  imgStyle: {
+    maxWidth: '100%'
+  },
+  helpIcon: {
+    color: '#b8b8b8',
+    marginLeft: '5px',
+  },
+  statisticalCardDesc: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  statisticalCardText: {
+    color: '#666',
+    position: 'relative',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    marginBottom: '4px',
+  },
+  statisticalCardNumber: {
+    color: '#666',
+    fontSize: '24px',
+  },
+  itemHelp: {
+    top: '1px',
+    width: '12px',
+    right: '-15px',
+    height: '12px',
+    position: 'absolute',
+  }
+  
 }

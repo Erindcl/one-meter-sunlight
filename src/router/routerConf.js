@@ -51,17 +51,6 @@ const routerConf = [
     layout: UserLayout,
     component: Register,
   },
-  // {
-  //   path: '/manager',
-  //   layout: BasicLayout,
-  //   children:[
-  //     {
-  //       path:'/dashboard',
-  //       layout: null,
-  //       component: Dashboard,
-  //     },
-  //   ]
-  // },
   {
     path:'/dashboard/monitor',
     layout: BasicLayout,
@@ -71,12 +60,7 @@ const routerConf = [
 		path: '*',
     layout: null,
     component: Page404,
-  },
-  // {
-  //   path:'/manager',
-  //   layout: null,
-  //   component: BasicLayout,
-  // }
+  }
 ];
 
 

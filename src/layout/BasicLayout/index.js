@@ -23,15 +23,6 @@ export default class BasicLayout extends Component {
               </Content>
             </Layout>
           </Content>
-          {/* <Layout.Section scrollable>
-            <Layout.Aside>
-              <Aside />
-            </Layout.Aside>
-            <Layout.Main>
-              {this.props.children}
-            </Layout.Main>
-          </Layout.Section> */}
-
           <Footer />
         </Layout>
       </div>
