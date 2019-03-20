@@ -101,7 +101,7 @@ export default class Aside extends Component {
               {item.icon ? (
                 <Icon size="small" type={item.icon} />
               ) : null}
-              <span className="ice-menu-collapse ice-menu-collapse-hide">
+              <span className="menu-collapse menu-collapse-hide">
                 {item.name}
               </span>
             </span>

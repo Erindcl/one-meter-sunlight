@@ -1,30 +1,32 @@
 import React, { PureComponent } from 'react';
-import Layout from '@icedesign/layout';
+import {Layout} from 'antd';
 import Logo from '../Logo';
 
 import './Footer.scss';
 
-export default class Footer extends PureComponent {
+const {Footer} = Layout;
+
+export default class FooterPage extends PureComponent {
   render() {
     return (
-      <Layout.Footer className="ice-design-layout-footer">
-        <div className="ice-design-layout-footer-body">
-          <div style={{ filter: 'grayscale(100%)', opacity: 0.3 }}>
+      <Footer className="layout-footer" style={{ background: 'rgba(0,0,0,0)' }}>
+        <div className="layout-footer-body">
+          <div style={{ filter: 'grayscale(75%)' }}>
             <Logo />
           </div>
           <div className="copyright">
             © 2018 Theme designed by{' '}
             <a
-              href="https://github.com/alibaba/ice"
+              href="##"
               target="_blank"
               className="copyright-link"
               rel="noopener noreferrer"
             >
-              ICE
+              kangroo
             </a>
           </div>
         </div>
-      </Layout.Footer>
+      </Footer>
     );
   }
 }
