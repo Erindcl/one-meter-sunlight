@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
-import { Tab } from '@alifd/next';
+import { Tabs , Card, Table } from 'antd';
 import { API } from "@/api/index.js";
-import CustomTable from './components/CustomTable';
 import EditDialog from './components/EditDialog';
 import DeleteBalloon from './components/DeleteBalloon';
 
-const TabPane = Tab.Item;
+const TabPane = Tabs.TabPane;
 
 const tabs = [{ tab: '全部', key: 'all' }, { tab: '审核中', key: 'review' }];
 
@@ -89,9 +87,9 @@ export default class TabTable extends Component {
   }
 
   componentDidMount() {
-    API.getUserListM(params).then(response =>{ 
+    API.getUserListM().then(response =>{ 
       this.setState({
-        dataSource: response.data.data,
+        dataSource: response.data,
       });
     });
   }
@@ -119,24 +117,20 @@ export default class TabTable extends Component {
   };
 
   render() {
-    const { dataSource } = this.state;
+    const { dataSource, tabKey } = this.state;
     return (
       <div className="tab-table">
-        <IceContainer style={{ padding: '0 20px 20px' }}>
-          <Tab onChange={this.handleTabChange}>
+        <Card>
+          <Tabs onChange={this.handleTabChange}>
             {tabs.map((item) => {
               return (
-                <TabPane title={item.tab} key={item.key}>
-                  <CustomTable
-                    dataSource={dataSource[this.state.tabKey]}
-                    columns={this.columns}
-                    hasBorder={false}
-                  />
+                <TabPane tab={item.tab} key={item.key}>
+                  <Table columns={this.columns} dataSource={dataSource[tabKey]} />
                 </TabPane>
               );
             })}
-          </Tab>
-        </IceContainer>
+          </Tabs>
+        </Card>
       </div>
     );
   }

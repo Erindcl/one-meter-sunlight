@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Dialog, Button, Form, Input, Field } from '@alifd/next';
+import { Modal, Button, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
-export default class EditDialog extends Component {
+class EditDialog extends Component {
   static displayName = 'EditDialog';
 
   static defaultProps = {};
@@ -14,11 +14,10 @@ export default class EditDialog extends Component {
       visible: false,
       dataIndex: null,
     };
-    this.field = new Field(this);
   }
 
   handleSubmit = () => {
-    this.field.validate((errors, values) => {
+    this.props.form.validateFields((errors, values) => {
       if (errors) {
         console.log('Errors in form!!!');
         return;
@@ -33,7 +32,7 @@ export default class EditDialog extends Component {
   };
 
   onOpen = (index, record) => {
-    this.field.setValues({ ...record });
+    this.props.form.setFieldsValue({ ...record });
     this.setState({
       visible: true,
       dataIndex: index,
@@ -47,11 +46,11 @@ export default class EditDialog extends Component {
   };
 
   render() {
-    const init = this.field.init;
+    const { getFieldDecorator } = this.props.form;
     const { index, record } = this.props;
     const formItemLayout = {
       labelCol: {
-        fixedSpan: 6,
+        span: 6,
       },
       wrapperCol: {
         span: 14,
@@ -60,84 +59,92 @@ export default class EditDialog extends Component {
 
     return (
       <div style={styles.editDialog}>
-        <Button type="primary" onClick={() => this.onOpen(index, record)}>
+        <Button type="primary" onClick={() => this.onOpen(record, index)}>
           编辑
         </Button>
-        <Dialog
+        <Modal
+          title="编辑"
           style={{ width: 640 }}
           visible={this.state.visible}
           onOk={this.handleSubmit}
-          closeable="esc,mask,close"
           onCancel={this.onClose}
-          onClose={this.onClose}
-          title="编辑"
+          okText="确认"
+          cancelText="取消"
         >
-          <Form field={this.field}>
+          <Form>
             <FormItem label="用户名：" {...formItemLayout}>
-              <Input
-                {...init('username', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+              {getFieldDecorator('username', {
+                rules: [{
+                  required: true, message: '必填选项'
+                }]
+              })(
+                <Input />
+              )}
             </FormItem>
 
             <FormItem label="邮箱：" {...formItemLayout}>
-              <Input
-                {...init('email', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+              {getFieldDecorator('email', {
+                rules: [{
+                  required: true, message: '必填选项'
+                }]
+              })(
+                <Input />
+              )} 
             </FormItem>
 
             <FormItem label="用户组：" {...formItemLayout}>
-              <Input
-                {...init('group', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+              {getFieldDecorator('group', {
+                rules: [{
+                  required: true, message: '必填选项'
+                }]
+              })(
+                <Input />
+              )} 
             </FormItem>
 
-            <FormItem label="文章数：" {...formItemLayout}>
-              <Input
-                disabled
-                {...init('articleNum', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+            <FormItem label="文章数：" {...formItemLayout}>        {getFieldDecorator('articleNum', {
+                rules: [{
+                  required: true, message: '必填选项'
+                }]
+              })(
+                <Input />
+              )}
             </FormItem>
 
-            <FormItem label="评论数：" {...formItemLayout}>
-              <Input
-                disabled
-                {...init('commentNum', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+            <FormItem label="评论数：" {...formItemLayout}>        {getFieldDecorator('commentNum', {
+                rules: [{
+                  required: true, message: '必填选项'
+                }]
+              })(
+                <Input />
+              )}
             </FormItem>
 
-            <FormItem label="注册时间：" {...formItemLayout}>
-              <Input
-                disabled
-                {...init('regTime', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+            <FormItem label="注册时间：" {...formItemLayout}>      {getFieldDecorator('regTime', {
+                rules: [{
+                  required: true, message: '必填选项'
+                }]
+              })(
+                <Input />
+              )}
             </FormItem>
 
-            <FormItem label="最后登录时间：" {...formItemLayout}>
-              <Input
-                disabled
-                {...init('LastLoginTime', {
-                  rules: [{ required: true, message: '必填选项' }],
-                })}
-              />
+            <FormItem label="最后登录时间：" {...formItemLayout}>   {getFieldDecorator('LastLoginTime', {
+                rules: [{
+                  required: true, message: '必填选项'
+                }]
+              })(
+                <Input />
+              )}
             </FormItem>
           </Form>
-        </Dialog>
+        </Modal>
       </div>
     );
   }
 }
+
+export default Form.create()(EditDialog)
 
 const styles = {
   editDialog: {

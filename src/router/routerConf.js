@@ -18,6 +18,9 @@ const PostList = Loadable({loader:() => import('../pages/PostList'),loading: Loa
 const CreatePost = Loadable({loader:() => import('../pages/CreatePost'),loading: Loading});
 const CateList = Loadable({loader:() => import('../pages/CateList'),loading: Loading});
 const CreateCate = Loadable({loader:() => import('../pages/CreateCate'),loading: Loading});
+const UserList = Loadable({loader:() => import('../pages/UserList'),loading: Loading});
+const CreateUser = Loadable({loader:() => import('../pages/CreateUser'),loading: Loading});
+const EditPassword = Loadable({loader:() => import('../pages/EditPassword'),loading: Loading});
 
 const routerConf = [
   {
@@ -80,6 +83,21 @@ const routerConf = [
     path: '/cate/create',
     layout: BasicLayout,
     component: CreateCate,
+  },
+  {
+    path: '/users/list',
+    layout: BasicLayout,
+    component: UserList,
+  },
+  {
+    path: '/users/create',
+    layout: BasicLayout,
+    component: CreateUser,
+  },
+  {
+    path: '/users/pwd',
+    layout: BasicLayout,
+    component: EditPassword,
   },
 
 	{
