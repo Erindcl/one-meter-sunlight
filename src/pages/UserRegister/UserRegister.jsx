@@ -35,7 +35,7 @@ class UserRegister extends Component {
   };
 
   handleConfirmPassword = (rule, value, callback) => {
-    const { getFieldValue } = this.props.form
+    const { getFieldValue } = this.props.form;
     if (value && value !== getFieldValue('newPassword')) {
         callback('两次输入不一致！')
     }
