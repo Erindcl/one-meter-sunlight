@@ -45,11 +45,7 @@ const asideMenuConfig = [
     path: '/setting',
     icon: 'setting',
     children: [
-      { name: '基础设置', path: '/setting/basic' },
-      {
-        name: '菜单设置',
-        path: '/setting/navigation',
-      },
+      { name: '基础设置', path: '/setting/basic' }
     ],
   },
 ];

@@ -22,7 +22,6 @@ const UserList = Loadable({loader:() => import('../pages/UserList'),loading: Loa
 const CreateUser = Loadable({loader:() => import('../pages/CreateUser'),loading: Loading});
 const EditPassword = Loadable({loader:() => import('../pages/EditPassword'),loading: Loading});
 const BasicSetting = Loadable({loader:() => import('../pages/BasicSetting'),loading: Loading});
-const NavigationSetting = Loadable({loader:() => import('../pages/NavigationSetting'),loading: Loading});
 
 const routerConf = [
   {
@@ -105,11 +104,6 @@ const routerConf = [
     path: '/setting/basic',
     layout: BasicLayout,
     component: BasicSetting,
-  },
-  {
-    path: '/setting/navigation',
-    layout: BasicLayout,
-    component: NavigationSetting,
   },
 
 	{
