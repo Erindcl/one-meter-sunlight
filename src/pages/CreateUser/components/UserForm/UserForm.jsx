@@ -14,15 +14,7 @@ class UserForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: {
-        username: '',
-        displayName: '',
-        email: '',
-        userGroup: null,
-        userState: null,
-        passwd: '',
-        rePasswd: '',
-      },
+      
     };
   }
 
@@ -38,7 +30,7 @@ class UserForm extends Component {
     }
   };
 
-  handleConfirmPassword = (rule, values, callback, stateValues) => {
+  handleConfirmPassword = (rule, values, callback) => {
     const { getFieldValue } = this.props.form
     if (values && values !== getFieldValue('newPassword')) {
       callback('两次输入密码不一致');
@@ -186,7 +178,7 @@ class UserForm extends Component {
           </Form>
 
           <Row style={{ marginTop: 20 }}>
-            <Col offset="3">
+            <Col offset="1">
               <Button
                 type="primary"
                 onClick={this.handleSubmit}

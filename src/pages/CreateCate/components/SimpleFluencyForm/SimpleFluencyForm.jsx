@@ -59,7 +59,7 @@ class SimpleFluencyForm extends Component {
                         required: true, message: '必填项',
                       }],
                     })(
-                      <Input placeholder="请填写分类名称" />
+                      <Input size="large" placeholder="请填写分类名称" />
                     )}
                   </FormItem>
                 </Col>
@@ -72,7 +72,7 @@ class SimpleFluencyForm extends Component {
                         required: true, message: '必填项',
                       }],
                     })(
-                      <Input placeholder="请填写缩略名称" />
+                      <Input size="large" placeholder="请填写缩略名称" />
                     )}
                   </FormItem>
                 </Col>

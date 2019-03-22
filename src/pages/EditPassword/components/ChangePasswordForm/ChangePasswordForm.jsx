@@ -1,18 +1,11 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
-import IceContainer from '@icedesign/container';
-import { Input, Grid, Button, Message } from '@alifd/next';
-import {
-  FormBinderWrapper as IceFormBinderWrapper,
-  FormBinder as IceFormBinder,
-  FormError as IceFormError,
-} from '@icedesign/form-binder';
+import { Card, Form, Input, Row, Col, Button, message } from 'antd';
 import './ChangePasswordForm.scss';
 
-const { Row, Col } = Grid;
-const Toast = Message;
+const FormItem = Form.Item;
 
-export default class ChangePasswordForm extends Component {
+class ChangePasswordForm extends Component {
   static displayName = 'ChangePasswordForm';
 
   static propTypes = {};
@@ -22,10 +15,7 @@ export default class ChangePasswordForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: {
-        passwd: '',
-        rePasswd: '',
-      },
+      
     };
   }
 
@@ -41,93 +31,77 @@ export default class ChangePasswordForm extends Component {
     }
   };
 
-  checkPasswd2 = (rule, values, callback, stateValues) => {
-    if (values && values !== stateValues.passwd) {
+  handleConfirmPassword = (rule, values, callback) => {
+    if (values && values !== getFieldValue('newPassword')) {
       callback('两次输入密码不一致');
     } else {
       callback();
     }
   };
 
-  formChange = (value) => {
-    this.setState({
-      value,
-    });
-  };
-
-  validateAllFormField = () => {
-    this.refs.form.validateAll((errors, values) => {
+  handleSubmit = () => {
+    this.props.form.validateFields((errors, values) => {
       if (errors) {
         console.log('errors', errors);
         return;
       }
 
       console.log('values:', values);
-      Toast.success('修改成功');
+      message.success('修改成功');
     });
   };
 
   render() {
+    const { getFieldDecorator } = this.props.form;
+    const formItemLayout = {
+      labelCol: {
+        span: 4,
+      },
+      wrapperCol: {
+        span: 11,
+      },
+    };
     return (
       <div className="change-password-form">
-        <IceContainer>
-          <IceFormBinderWrapper
-            value={this.state.value}
-            onChange={this.formChange}
-            ref="form"
-          >
+        <Card>
+          <Form>
             <div style={styles.formContent}>
               <h2 style={styles.formTitle}>修改密码</h2>
 
               <Row style={styles.formItem}>
-                <Col xxs="6" s="4" l="3" style={styles.formLabel}>
-                  新密码：
-                </Col>
-                <Col xxs="16" s="10" l="6">
-                  <IceFormBinder
-                    name="passwd"
-                    required
-                    validator={this.checkPasswd}
-                  >
-                    <Input
-                      htmlType="password"
-                      placeholder="请重新输入新密码"
-                    />
-                  </IceFormBinder>
-                  <IceFormError name="passwd" />
+                <Col span="15">
+                  <FormItem label="新密码：" {...formItemLayout}>
+                    {getFieldDecorator('newPassword', {
+                      rules: [{
+                        required: true, message: '必填项'
+                      }],
+                    })(
+                      <Input size="large" type="password" placeholder="请重新输入新密码" />
+                    )}
+                  </FormItem>
                 </Col>
               </Row>
 
               <Row style={styles.formItem}>
-                <Col xxs="6" s="4" l="3" style={styles.formLabel}>
-                  确认密码：
-                </Col>
-                <Col xxs="16" s="10" l="6">
-                  <IceFormBinder
-                    name="rePasswd"
-                    required
-                    validator={(rule, values, callback) =>
-                      this.checkPasswd2(
-                        rule,
-                        values,
-                        callback,
-                        this.state.value
-                      )
-                    }
-                  >
-                    <Input
-                      htmlType="password"
-                      placeholder="两次输入密码保持一致"
-                    />
-                  </IceFormBinder>
-                  <IceFormError name="rePasswd" />
+                <Col span="15">
+                  <FormItem label="确认密码：" {...formItemLayout}>
+                    {getFieldDecorator('passwordConfirm', {
+                      rules: [{
+                        required: true, message: '必填项'
+                      }, {
+                        validator: this.handleConfirmPassword
+                      }],
+                    })(
+                      <Input size="large" type="password" type="password" placeholder="请再次输入以确认新密码" />
+                    )}
+                  </FormItem>
                 </Col>
               </Row>
             </div>
-          </IceFormBinderWrapper>
+          </Form>
 
           <Row style={{ marginTop: 20 }}>
-            <Col offset="3">
+            <Col offset="1">
               <Button
                 type="primary"
                 onClick={this.validateAllFormField}
@@ -136,11 +110,13 @@ export default class ChangePasswordForm extends Component {
               </Button>
             </Col>
           </Row>
-        </IceContainer>
+        </Card>
       </div>
     );
   }
 }
+
+export default Form.create()(ChangePasswordForm);
 
 const styles = {
   formContent: {

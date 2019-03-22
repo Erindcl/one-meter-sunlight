@@ -63,7 +63,7 @@ class ContentEditor extends Component {
                         required: true, message: '标题必填',
                       }],
                     })(
-                      <Input placeholder="这里填写文章标题" />
+                      <Input size="large" placeholder="这里填写文章标题" />
                     )}
                   </FormItem>
                 </Col>
@@ -76,7 +76,7 @@ class ContentEditor extends Component {
                         required: true, message: '作者信息必填',
                       }],
                     })(
-                      <Input placeholder="填写作者名称" />
+                      <Input size="large" placeholder="填写作者名称" />
                     )}
                   </FormItem>
                 </Col>
@@ -88,6 +88,7 @@ class ContentEditor extends Component {
                       }],
                     })(
                       <Select 
+                        size="large"
                         placeholder="请选择分类"
                         style={styles.cats}
                         mode="multiple"
