@@ -13,8 +13,7 @@ var storySchema = new Schema({ // 具体表模型根据数据库中而定  列�
   "contentAll": String,  // 完整版内容
   "remarkGroup": Array,
   "date": String,
-  "tabs": Array, // 标签（专题）
-  "boughters": Array  // 买了此故事的人   
+  "tabs": Array, // 标签（专题）  
 });
 
 module.exports = mongoose.model('Story',storySchema); // 不带名字的输出本文件
