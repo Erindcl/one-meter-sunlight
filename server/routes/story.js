@@ -75,7 +75,7 @@ router.get("/list", function (req,res,next) {
 // 单个故事详情
 router.get("/detail", function (req,res,next) {
   // storyId: 1
-  Stories.find({id: req.param("storyId")}, function (err,doc) {
+  Stories.findOne({id: req.param("storyId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -139,7 +139,7 @@ router.post("/remove-remark", function (req,res,next) {
       remarkGroup = doc.remarkGroup;
     }
   });
-  remarkGroup.splice(remarkGroup.indexOf(remarkGroup),1);
+  remarkGroup.splice(remarkGroup.indexOf(remarkId),1);
   Stories.update({id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
     if (err) {
       res.json({

@@ -19,76 +19,76 @@ mongoose.connection.on("disconnected", function () {
 });
 
 // 添加数据进数据库  creat
-// router.get("/", function (req,res,next) {
-//   var newDoc = ({
-//     "productId" : "024",
-//     "productName" : "小花花",
-//     "productImage" : ".././",
-//     "salePrice" : "553",
-//     "checked" : "false",
-//     "productNum" : 79
-//   });
-//   Goods.create(newDoc, function(err, docs){
-//       if (err) {
-//         res.json({
-//           status: '1',
-//           msg: err.message
-//         });
-//       } else {
-//         res.json({
-//           status: '0',
-//           msg: '',
-//           result: {
-//             count: docs.length, 
-//             list: docs // docs -> newDoc
-//           }
-//         });
-//       }
-//   });
-// });
+router.get("/creat", function (req,res,next) {
+  var newDoc = ({
+    "productId" : "024",
+    "productName" : "小花花",
+    "productImage" : ".././",
+    "salePrice" : "553",
+    "checked" : "false",
+    "productNum" : 79
+  });
+  Goods.create(newDoc, function(err, docs){
+      if (err) {
+        res.json({
+          status: '1',
+          msg: err.message
+        });
+      } else {
+        res.json({
+          status: '0',
+          msg: '',
+          result: {
+            count: docs.length, 
+            list: docs // docs -> newDoc
+          }
+        });
+      }
+  });
+});
 
 // 从数据库中删除指定数据 删 remove
-// router.get("/", function (req,res,next) {
-//   Goods.remove({productId: "024"}, function(err, docs){
-//       if (err) {
-//         res.json({
-//           status: '1',
-//           msg: err.message
-//         });
-//       } else {
-//         res.json({
-//           status: '0',
-//           msg: '',
-//           result: {
-//             count: docs.length, 
-//             list: docs // docs -> {n: 1, ok: 1}
-//           }
-//         });
-//       }
-//   });
-// });
+router.get("/remove", function (req,res,next) {
+  Goods.remove({productId: "024"}, function(err, docs){
+      if (err) {
+        res.json({
+          status: '1',
+          msg: err.message
+        });
+      } else {
+        res.json({
+          status: '0',
+          msg: '',
+          result: {
+            count: docs.length, 
+            list: docs // docs -> {n: 1, ok: 1}
+          }
+        });
+      }
+  });
+});
 
 // 修改数据库中指定数据 改 update 
 // 注意 查找条件属性的值的类型必须与数据库中的一致 否则会查找不到要修改的记录
-// router.get("/", function (req,res,next) {
-//   Goods.update({productNum: 20}, {productName: "小花花花"}, {multi: true},  function(err, docs){
-//       if (err) {
-//         res.json({
-//           status: '1',
-//           msg: err.message
-//         });
-//       } else {
-//         res.json({
-//           status: '0',
-//           msg: '',
-//           result: {
-//             count: docs.length, 
-//             list: docs  // docs -> {n: 1, nModified: 1, ok: 1}
-//           }
-//         });
-//       }
-//   });
-// });
+router.get("/update", function (req,res,next) {
+  Goods.update({productNum: 20}, {productName: "小花花花"}, {multi: true},  function(err, docs){
+      if (err) {
+        res.json({
+          status: '1',
+          msg: err.message
+        });
+      } else {
+        res.json({
+          status: '0',
+          msg: '',
+          result: {
+            count: docs.length, 
+            list: docs  // docs -> {n: 1, nModified: 1, ok: 1}
+          }
+        });
+      }
+  });
+});
 
 // 无参数的从数据库中获取数据的方法  查  find
 // 获取路由 获取成功就查询数据库
