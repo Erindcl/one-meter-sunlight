@@ -99,7 +99,7 @@ export default {
     method:'post',
     url:'/api/user/register'
   },
-  gfetUserBaseInfor:{
+  getUserBaseInfor:{
     method:'get',
     url:'/api/user/base-infor'
   },
