@@ -46,9 +46,78 @@ export default {
     url:'/mock/tab-table.json'
   },
 
+  // 故事相关
   getStoryList:{
     method:'get',
-    url:'/app/story-list'
+    url:'/api/story/list'
   },
-  
+  getStoryDetail:{
+    method:'get',
+    url:'/api/story/detail'
+  },
+  doStoryAddRemark:{
+    method:'post',
+    url:'/api/story/add-remark'
+  },
+  doStoryRemoveRemark:{
+    method:'post',
+    url:'/api/story/remove-remark'
+  },
+
+  //评论相关
+  getRemarkList:{
+    method:'get',
+    url:'/api/remark/list'
+  },
+  addRemark:{
+    method:'post',
+    url:'/api/remark/add'
+  },
+  removeRemark:{
+    method:'post',
+    url:'/api/remark/remove'
+  },
+  supportOrAgainstRemark:{
+    method:'post',
+    url:'/api/remark/support-or-against'
+  },
+
+  // 用户相关
+  doUserAddRemark:{
+    method:'post',
+    url:'/api/user/add-remark'
+  },
+  doUserRemoveRemark:{
+    method:'post',
+    url:'/api/user/remove-remark'
+  },
+  userLogin:{
+    method:'post',
+    url:'/api/user/login'
+  },
+  userRegister:{
+    method:'post',
+    url:'/api/user/register'
+  },
+  gfetUserBaseInfor:{
+    method:'get',
+    url:'/api/user/base-infor'
+  },
+  updateUserInfor:{
+    method:'post',
+    url:'/api/user/update-infor'
+  },
+  putCorn:{
+    method:'post',
+    url:'/api/user/put-corn'
+  },
+  payCorn:{
+    method:'post',
+    url:'/api/user/pay-corn'
+  },
+  addIntoShoppingCar:{
+    method:'post',
+    url:'/api/user/add-into-shoppingcar'
+  },
+
 }
