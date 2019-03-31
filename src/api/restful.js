@@ -46,6 +46,11 @@ export default {
     url:'/mock/tab-table.json'
   },
 
+  getGoodsList:{
+    method:'get',
+    url:'/api/good'
+  },
+
   // 故事相关
   getStoryList:{
     method:'get',

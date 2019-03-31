@@ -14,13 +14,13 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    
+    this.getStoryList();
   }
 
   getStoryList = () => {
     API.getStoryList({
       theme: 'all', // 可选
-      // id: [1,2],  // 可选
+      id: [1,2],  // 可选
       pageSize: 10, 
       pageNo: 1, 
       sort: 'time'

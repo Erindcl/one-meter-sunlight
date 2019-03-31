@@ -10,7 +10,7 @@ module.exports = (context) => {
       "port": serverConfig.port
     },
     proxy: [{ 
-      "context": ["/app"],
+      "context": ["/api"],
       "target": "http://localhost:2262"
     }],
     dll:[],

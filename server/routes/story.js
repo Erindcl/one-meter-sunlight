@@ -18,6 +18,28 @@ mongoose.connection.on("disconnected", function () {
   console.log("story_station MongoDB connected disconnected");
 });
 
+router.get("/", function (req,res,next) {
+  console.log('请求了storylist')
+  Stories.find({}, function (err,doc) {
+    if (err) {
+      res.json({
+        success: false,
+        message: err.message,
+        data: {}
+      });
+    } else {
+      res.json({
+        success: true,
+        message: '',
+        data: {
+          count: doc.length,
+          list: doc
+        }
+      });
+    }
+  });
+});
+
 // 通过主题或者id值筛选故事列表
 router.get("/list", function (req,res,next) {
   // theme: 'all', // 可选
@@ -35,7 +57,8 @@ router.get("/list", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       initDoc = doc;
@@ -72,14 +95,15 @@ router.get("/list", function (req,res,next) {
   });
 });
 
-// 单个故事详情
+// // 单个故事详情
 router.get("/detail", function (req,res,next) {
   // storyId: 1
   Stories.findOne({id: req.param("storyId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -91,7 +115,7 @@ router.get("/detail", function (req,res,next) {
   });
 });
 
-// 故事评论添加
+// // 故事评论添加
 router.post("/add-remark", function (req,res,next) {
   // remarkId: 1,
   // storyId: 1
@@ -100,7 +124,8 @@ router.post("/add-remark", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       remarkGroup = doc.remarkGroup;
@@ -111,7 +136,8 @@ router.post("/add-remark", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -123,7 +149,7 @@ router.post("/add-remark", function (req,res,next) {
   });
 });
 
-// 故事评论删除
+// // 故事评论删除
 router.post("/remove-remark", function (req,res,next) {
   // remarkId: 1,
   // storyId: 1
@@ -133,7 +159,8 @@ router.post("/remove-remark", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       remarkGroup = doc.remarkGroup;
@@ -144,7 +171,8 @@ router.post("/remove-remark", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
