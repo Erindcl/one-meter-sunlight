@@ -62,35 +62,42 @@ router.get("/list", function (req,res,next) {
       });
     } else {
       initDoc = doc;
-    }
-  });
-  if (req.param("theme") && req.param("theme") != 'all') {
-    initDoc.forEach((item,index) => {
-      if (item.tabs.indexOf(req.param("theme"))) {
-        resultDoc.push(item);
+      if (req.param("theme")) {
+        if (req.param("theme") != 'all') {
+          initDoc.forEach((item,index) => {
+            if (item.tabs.indexOf(req.param("theme"))) {
+              resultDoc.push(item);
+            }
+          })
+        } else {
+          resultDoc = initDoc;
+        }
       }
-    })
-    if (sort == 'hot') {
-      resultDoc.sort((itemA,itemB) => {return itemB.watchCount - itemA.watchCount;});
-    }
+      if (req.param("id")) {
+        initDoc.forEach((item,index) => {
+          if (req.param("id").indexOf(item.id) != -1) {
+            resultDoc.push(item);
+          }
+        })
+      }
+
+      
+      if (sort == 'hot') { // 排序设置 默认按照id也就是时间顺序 否则按照热度排序
+        resultDoc.sort((itemA,itemB) => {return itemB.watchCount - itemA.watchCount;});
+      } else {
+        resultDoc.sort((itemA,itemB) => {return itemB.id - itemA.id;});
+      }
+
+      resultDoc = resultDoc.slice(skip, skip + pageSize); // 翻页设置
     
-  }
-  if (req.param("id")) {
-    initDoc.forEach((item,index) => {
-      if (req.param("id").indexOf(item.id)) {
-        resultDoc.push(item);
-      }
-    })
-  }
-
-  resultDoc = resultDoc.slice(skip,pageSize); // 翻页设置
-
-  res.json({
-    success: true,
-    message: '',
-    data: {
-      count: resultDoc.length,
-      list: resultDoc
+      res.json({
+        success: true,
+        message: '',
+        data: {
+          count: resultDoc.length,
+          list: resultDoc
+        }
+      });
     }
   });
 });

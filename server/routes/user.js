@@ -26,7 +26,8 @@ router.post("/login", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -60,7 +61,8 @@ router.post("/register", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -79,7 +81,8 @@ router.get("/base-infor", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -110,7 +113,8 @@ router.post("/update-infor", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -131,7 +135,8 @@ router.post("/put-corn", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       coin = doc.coin;
@@ -142,7 +147,8 @@ router.post("/put-corn", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -163,7 +169,8 @@ router.post("/add-into-shoppingcar", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       shoppingcar = doc.shoppingcar;
@@ -174,7 +181,8 @@ router.post("/add-into-shoppingcar", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -200,7 +208,8 @@ router.post("/pay-corn", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       shoppingcar = doc.shoppingcar;
@@ -225,7 +234,8 @@ router.post("/pay-corn", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -246,7 +256,8 @@ router.post("/add-remark", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       postRemarks = doc.postRemarks;
@@ -257,7 +268,8 @@ router.post("/add-remark", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -279,7 +291,8 @@ router.post("/remove-remark", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       postRemarks = doc.postRemarks;
@@ -290,7 +303,8 @@ router.post("/remove-remark", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({

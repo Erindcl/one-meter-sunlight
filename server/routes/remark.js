@@ -32,7 +32,8 @@ router.get("/list", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       initDoc = doc;
@@ -76,7 +77,8 @@ router.post("/add", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -95,7 +97,8 @@ router.post("/remove", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
@@ -116,7 +119,8 @@ router.post("/support-or-against", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       changeObj = req.param("type") == 'support' ? { support: doc.support } : { against: doc.against };
@@ -126,7 +130,8 @@ router.post("/support-or-against", function (req,res,next) {
     if (err) {
       res.json({
         success: false,
-        message: err.message
+        message: err.message,
+        data: {}
       });
     } else {
       res.json({
