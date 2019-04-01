@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.doStoryAddRemark();
+    this.doStoryRemoveRemark();
   }
 
   getStoryList = () => {
