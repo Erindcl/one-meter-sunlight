@@ -39,7 +39,7 @@ router.get("/list", function (req,res,next) {
     } else {
       initDoc = doc;
       initDoc.forEach((item,index) => {
-        if (req.param("id").indexOf(item.id) != -1) {
+        if (req.param("id").indexOf(item._id) != -1) {
           resultDoc.push(item);
         }
       })
@@ -67,17 +67,8 @@ router.post("/add", function (req,res,next) {
 	// date: 2019-03-13,  
 	// content: '',
 	// support: 0,
-	// against: 0,
-  var newDoc = ({
-    "userName": req.param("userName"),
-		"userId": parseInt(req.param("userId")),
-		"date": req.param("date"),  
-		"content": req.param("content"),
-		"support": parseInt(req.param("support")),
-    "against": parseInt(req.param("against")),
-    "id": 3
-  });
-  Remark.create(newDoc, function(err, docs){
+  // against: 0,
+  Remark.find({}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -85,10 +76,30 @@ router.post("/add", function (req,res,next) {
         data: {}
       });
     } else {
-      res.json({
-        success: true,
-        message: '',
-        data: docs
+      let length = doc.length;
+      var newDoc = ({
+        "userName": req.param("userName"),
+        "userId": parseInt(req.param("userId")),
+        "date": req.param("date"),  
+        "content": req.param("content"),
+        "support": parseInt(req.param("support")),
+        "against": parseInt(req.param("against")),
+        "id": length + 1
+      });
+      Remark.create(newDoc, function(err, docs){
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: docs
+          });
+        }
       });
     }
   });
@@ -97,7 +108,7 @@ router.post("/add", function (req,res,next) {
 // 评论删除
 router.post("/remove", function (req,res,next) {
   // remarkId: 1
-  Remark.remove({id: req.param("remarkId")}, function(err, docs){
+  Remark.remove({_id: req.param("remarkId")}, function(err, docs){
     if (err) {
       res.json({
         success: false,
@@ -119,7 +130,7 @@ router.post("/support-or-against", function (req,res,next) {
   // remarkId: 1
   // type: 'support|against'
   let changeObj = {};
-  Remark.findOne({id: req.param("remarkId")}, function (err,doc) {
+  Remark.findOne({_id: req.param("remarkId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -128,7 +139,7 @@ router.post("/support-or-against", function (req,res,next) {
       });
     } else {
       changeObj = req.param("type") == 'support' ? { support: doc.support + 1 } : { against: doc.against + 1 };
-      Remark.update({id: req.param("remarkId")}, changeObj, {multi: true}, function(err, docs){
+      Remark.update({_id: req.param("remarkId")}, changeObj, {multi: true}, function(err, docs){
         if (err) {
           res.json({
             success: false,

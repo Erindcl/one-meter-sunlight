@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.supportOrAgainstRemark();
+    this.removeRemark();
   }
 
   getStoryList = () => {
@@ -77,7 +77,7 @@ export default class All extends Component {
 
   getRemarkList = () => {
     API.getRemarkList({
-      id: [1,2],
+      id: ['5c88f0ce4ec74b19ccf8ca8e','5c9d74e03ecbdaae11bb7659'], 
       pageSize: 1, 
       pageNo: 1
     }).then(response =>{ 
@@ -85,7 +85,7 @@ export default class All extends Component {
       if (success) {
         console.log(data);
       } else {
-        Message.error(message);
+        Message.error(message); 
       }
     });
   }
@@ -110,7 +110,7 @@ export default class All extends Component {
 
   removeRemark = () => {
     API.removeRemark({
-      remarkId: 3
+      remarkId: '5ca348161dc85b2de8836abe'
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
@@ -138,7 +138,7 @@ export default class All extends Component {
   doUserAddRemark = () => {
     API.doUserAddRemark({
       remarkId: 1,
-		  userId: 1
+		  userId: 1 // 这些id值使用数据库自动生成的那个_id的值
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
