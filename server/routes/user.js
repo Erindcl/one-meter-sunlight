@@ -22,7 +22,7 @@ mongoose.connection.on("disconnected", function () {
 router.post("/login", function (req,res,next) {
   // userName: '',
 	// password: ''
-  User.findOne({name: req.param("userName"), password: req.param("password")}, function (err,doc) {
+  User.findOne({email: req.param("email"), password: req.param("password")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -53,7 +53,7 @@ router.post("/register", function (req,res,next) {
 	// email: '',
 	// password: ''
   var newDoc = ({
-    "userName": req.param("userName"),
+    "name": req.param("userName"),
     "email": req.param("email"),
     "password": req.param("password"),
     "payPassword": req.param("password"),  // 默认为账号密码 可修改

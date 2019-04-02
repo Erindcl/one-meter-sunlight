@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.userLogin();
+    this.userRegister();
   }
 
   getStoryList = () => {
@@ -165,7 +165,7 @@ export default class All extends Component {
 
   userLogin = () => {
     API.userLogin({
-      userName: 'test1',
+      email: 'test1',
 	    password: '1234567'
     }).then(response =>{ 
       const { success, message, data } = response;
@@ -179,9 +179,9 @@ export default class All extends Component {
 
   userRegister = () => {
     API.userRegister({
-      userName: '',
-      email: '',
-      password: ''
+      userName: '123456',
+      email: 'hhh@123.com',
+      password: '12345678'
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
