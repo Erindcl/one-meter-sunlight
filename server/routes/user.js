@@ -212,7 +212,7 @@ router.post("/pay-corn", function (req,res,next) {
   let corn = 0;
   let storyIdList = req.param("storyIdList");
   let newShoppingCar = [];
-  User.findOne({id: req.param("userId")}, function (err,doc) {
+  User.findOne({_id: req.param("userId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -223,34 +223,36 @@ router.post("/pay-corn", function (req,res,next) {
       shoppingcar = doc.shoppingcar;
       bought = doc.bought;
       corn = doc.corn;
-    }
-  });
-  corn = corn - parseInt(req.param("userId"));
-  if (corn < 0) {
-    res.json({
-      success: false,
-      message: '币不足，请充值'
-    });
-  }
-  bought.push(...storyIdList);
-  shoppingcar.forEach((item) => {
-    if (storyIdList.indexOf(item) == -1) {
-      newShoppingCar.push(item);
-    }
-  });
-  User.update({id: req.param("userId")}, {bought: bought, shoppingcar: newShoppingCar, corn: corn}, {multi: true}, function (err,doc) {
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-        data: {}
-      });
-    } else {
-      res.json({
-        success: true,
-        message: '',
-        data: doc
-      });
+      corn = corn - parseInt(req.param("corn"));
+      if (corn < 0) {
+        res.json({
+          success: false,
+          message: '币不足，请充值',
+          data: {}
+        });
+      } else {
+        bought.push(...storyIdList);
+        shoppingcar.forEach((item) => {
+          if (storyIdList.indexOf(item) == -1) {
+            newShoppingCar.push(item);
+          }
+        });
+        User.update({_id: req.param("userId")}, {bought: bought, shoppingcar: newShoppingCar, corn: corn}, {multi: true}, function (err,doc) {
+          if (err) {
+            res.json({
+              success: false,
+              message: err.message,
+              data: {}
+            });
+          } else {
+            res.json({
+              success: true,
+              message: '',
+              data: doc
+            });
+          }
+        });
+      }
     }
   });
 });
