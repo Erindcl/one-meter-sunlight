@@ -15,4 +15,4 @@ var userSchema = new Schema({ // 具体表模型根据数据库中而定  列名
   "postRemarks": Array
 });
 
-module.exports = mongoose.model('User',userSchema); // 不带名字的输出本文件
+module.exports = mongoose.model('User',userSchema,'user'); // 不带名字的输出本文件

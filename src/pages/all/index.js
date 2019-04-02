@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.removeRemark();
+    this.doUserAddRemark();
   }
 
   getStoryList = () => {
@@ -137,8 +137,8 @@ export default class All extends Component {
 
   doUserAddRemark = () => {
     API.doUserAddRemark({
-      remarkId: 1,
-		  userId: 1 // 这些id值使用数据库自动生成的那个_id的值
+      remarkId: '5ca347041dc85b2de8836abc',
+		  userId: '5c88f0624ec74b19ccf8ca8d' // 这些id值使用数据库自动生成的那个_id的值
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
@@ -151,8 +151,8 @@ export default class All extends Component {
 
   doUserRemoveRemark = () => {
     API.doUserRemoveRemark({
-      remarkId: 1,
-		  userId: 1
+      remarkId: '5ca347041dc85b2de8836abc',
+		  userId: '5c88f0624ec74b19ccf8ca8d'
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {

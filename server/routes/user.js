@@ -252,7 +252,7 @@ router.post("/add-remark", function (req,res,next) {
   // remarkId: 1,
   // userId: 1
   let postRemarks = [];
-  User.findOne({id: req.param("userId")}, function (err,doc) {
+  User.findOne({_id: req.param("userId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -261,21 +261,21 @@ router.post("/add-remark", function (req,res,next) {
       });
     } else {
       postRemarks = doc.postRemarks;
-    }
-  });
-  postRemarks.push(req.param("remarkId"));
-  User.update({id: req.param("userId")}, {postRemarks: postRemarks}, {multi: true}, function (err,doc) {
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-        data: {}
-      });
-    } else {
-      res.json({
-        success: true,
-        message: '',
-        data: doc
+      postRemarks.push(req.param("remarkId"));
+      User.update({_id: req.param("userId")}, {postRemarks: postRemarks}, {multi: true}, function (err,doc) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: doc
+          });
+        }
       });
     }
   });
@@ -287,7 +287,7 @@ router.post("/remove-remark", function (req,res,next) {
   // userId: 1
   let postRemarks = [];
   let remarkId = req.param("remarkId");
-  User.findOne({id: req.param("userId")}, function (err,doc) {
+  User.findOne({_id: req.param("userId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -296,21 +296,21 @@ router.post("/remove-remark", function (req,res,next) {
       });
     } else {
       postRemarks = doc.postRemarks;
-    }
-  });
-  postRemarks.splice(postRemarks.indexOf(remarkId),1);
-  User.update({id: req.param("userId")}, {postRemarks: postRemarks}, {multi: true}, function (err,doc) {
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-        data: {}
-      });
-    } else {
-      res.json({
-        success: true,
-        message: '',
-        data: doc
+      postRemarks.splice(postRemarks.indexOf(remarkId),1);
+      User.update({_id: req.param("userId")}, {postRemarks: postRemarks}, {multi: true}, function (err,doc) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: doc
+          });
+        }
       });
     }
   });
