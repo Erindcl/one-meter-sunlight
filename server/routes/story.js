@@ -19,7 +19,6 @@ mongoose.connection.on("disconnected", function () {
 });
 
 router.get("/", function (req,res,next) {
-  console.log('请求了storylist')
   Stories.find({}, function (err,doc) {
     if (err) {
       res.json({
@@ -53,6 +52,7 @@ router.get("/list", function (req,res,next) {
   let skip = (page-1)*pageSize;
   let initDoc = [];
   let resultDoc = [];
+  let totalCount = 0;
   Stories.find({}, function (err,doc) {
     if (err) {
       res.json({
@@ -87,6 +87,7 @@ router.get("/list", function (req,res,next) {
       } else {
         resultDoc.sort((itemA,itemB) => {return itemB.id - itemA.id;});
       }
+      totalCount = resultDoc.length; 
 
       resultDoc = resultDoc.slice(skip, skip + pageSize); // 翻页设置
     
@@ -95,7 +96,8 @@ router.get("/list", function (req,res,next) {
         message: '',
         data: {
           count: resultDoc.length,
-          list: resultDoc
+          list: resultDoc,
+          totle: totalCount
         }
       });
     }
