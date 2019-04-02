@@ -75,7 +75,7 @@ router.get("/list", function (req,res,next) {
       }
       if (req.param("id")) {
         initDoc.forEach((item,index) => {
-          if (req.param("id").indexOf(item.id) != -1) {
+          if (req.param("id").indexOf(item._id) != -1) {
             resultDoc.push(item);
           }
         })
@@ -107,7 +107,7 @@ router.get("/list", function (req,res,next) {
 // // 单个故事详情
 router.get("/detail", function (req,res,next) {
   // storyId: 1
-  Stories.findOne({id: req.param("storyId")}, function (err,doc) {
+  Stories.findOne({_id: req.param("storyId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -129,7 +129,7 @@ router.post("/add-remark", function (req,res,next) {
   // remarkId: 1,
   // storyId: 1
   let remarkGroup = [];
-  Stories.findOne({id: req.param("storyId")}, function (err,doc) {
+  Stories.findOne({_id: req.param("storyId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -139,7 +139,7 @@ router.post("/add-remark", function (req,res,next) {
     } else {
       remarkGroup = doc.remarkGroup;
       remarkGroup.push(req.param("remarkId"));
-      Stories.update({id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
+      Stories.update({_id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
         if (err) {
           res.json({
             success: false,
@@ -165,7 +165,7 @@ router.post("/remove-remark", function (req,res,next) {
   // storyId: 1
   let remarkGroup = [];
   let remarkId = req.param("remarkId");
-  Stories.findOne({id: req.param("storyId")}, function (err,doc) {
+  Stories.findOne({_id: req.param("storyId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -175,7 +175,7 @@ router.post("/remove-remark", function (req,res,next) {
     } else {
       remarkGroup = doc.remarkGroup;
       remarkGroup.splice(remarkGroup.indexOf(remarkId),1);
-      Stories.update({id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
+      Stories.update({_id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
         if (err) {
           res.json({
             success: false,
