@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.userRegister();
+    this.putCorn();
   }
 
   getStoryList = () => {
@@ -194,7 +194,7 @@ export default class All extends Component {
 
   getUserBaseInfor = () => {
     API.getUserBaseInfor({
-      email: ''
+      email: 'hhh@123.com'
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
@@ -207,7 +207,7 @@ export default class All extends Component {
 
   updateUserInfor = () => {
     API.updateUserInfor({
-      email: '' // 参数待添加
+      userId: '5ca34ea975e2105aec133303' // 参数待添加
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
@@ -220,8 +220,8 @@ export default class All extends Component {
 
   putCorn = () => {
     API.putCorn({
-      userId: 1,
-	    coin: 56
+      userId: '5ca34ea975e2105aec133303',
+	    corn: 56
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {

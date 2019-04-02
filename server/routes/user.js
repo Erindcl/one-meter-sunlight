@@ -117,7 +117,7 @@ router.post("/update-infor", function (req,res,next) {
     "bought": req.param("bought"),
     "postRemarks": req.param("postRemarks"), 
   };
-  User.update({id: req.param("userId")}, { ...updateDoc }, {multi: true}, function (err,doc) {
+  User.update({_id: req.param("userId")}, { ...updateDoc }, {multi: true}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -138,8 +138,8 @@ router.post("/update-infor", function (req,res,next) {
 router.post("/put-corn", function (req,res,next) {
   // userId: 1,
 	// coin: 56
-  let coin = 0;
-  User.findOne({id: req.param("userId")}, function (err,doc) {
+  let cornCount = 0;
+  User.findOne({_id: req.param("userId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -147,22 +147,22 @@ router.post("/put-corn", function (req,res,next) {
         data: {}
       });
     } else {
-      coin = doc.coin;
-    }
-  });
-  coin = coin + parseInt(req.param("coin"));
-  User.update({id: req.param("userId")}, {coin: coin}, {multi: true}, function (err,doc) {
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-        data: {}
-      });
-    } else {
-      res.json({
-        success: true,
-        message: '',
-        data: doc
+      cornCount = doc.corn;
+      cornCount = cornCount + parseInt(req.param("corn"));
+      User.update({_id: req.param("userId")}, {corn: cornCount}, {multi: true}, function (err,doc) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: doc
+          });
+        }
       });
     }
   });
