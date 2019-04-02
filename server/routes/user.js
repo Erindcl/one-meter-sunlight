@@ -22,7 +22,7 @@ mongoose.connection.on("disconnected", function () {
 router.post("/login", function (req,res,next) {
   // userName: '',
 	// password: ''
-  User.findOne({userName: req.param("userName"), password: req.param("password")}, function (err,doc) {
+  User.findOne({name: req.param("userName"), password: req.param("password")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -30,11 +30,19 @@ router.post("/login", function (req,res,next) {
         data: {}
       });
     } else {
-      res.json({
-        success: true,
-        message: '登录成功',
-        data: doc
-      });
+      if (doc) {
+        res.json({
+          success: true,
+          message: '登录成功',
+          data: doc
+        });
+      } else {
+        res.json({
+          success: false,
+          message: '该用户不存在，请先注册',
+          data: {}
+        });
+      }
     }
   });
 });
