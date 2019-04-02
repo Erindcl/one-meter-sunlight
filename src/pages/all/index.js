@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.getRemarkList();
+    this.supportOrAgainstRemark();
   }
 
   getStoryList = () => {
@@ -110,7 +110,7 @@ export default class All extends Component {
 
   removeRemark = () => {
     API.removeRemark({
-      remarkId: 1
+      remarkId: 3
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
@@ -124,7 +124,7 @@ export default class All extends Component {
   supportOrAgainstRemark = () => {
     API.supportOrAgainstRemark({
       remarkId: 1,
-		  type: 'support'
+		  type: 'against'
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {

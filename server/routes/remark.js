@@ -127,21 +127,21 @@ router.post("/support-or-against", function (req,res,next) {
         data: {}
       });
     } else {
-      changeObj = req.param("type") == 'support' ? { support: doc.support } : { against: doc.against };
-    }
-  });
-  Remark.update({id: req.param("remarkId")}, changeObj, {multi: true}, function(err, docs){
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-        data: {}
-      });
-    } else {
-      res.json({
-        success: true,
-        message: '',
-        data: docs
+      changeObj = req.param("type") == 'support' ? { support: doc.support + 1 } : { against: doc.against + 1 };
+      Remark.update({id: req.param("remarkId")}, changeObj, {multi: true}, function(err, docs){
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: docs
+          });
+        }
       });
     }
   });
