@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.payCorn();
+    this.addIntoShoppingCar();
   }
 
   getStoryList = () => {
@@ -249,8 +249,8 @@ export default class All extends Component {
 
   addIntoShoppingCar = () => {
     API.addIntoShoppingCar({
-      userId: 1,
-	    storyId: 1,
+      userId: '5ca34ea975e2105aec133303',
+      storyId: '5c8c9489c1e8f80e8003cedd'
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {

@@ -173,7 +173,7 @@ router.post("/add-into-shoppingcar", function (req,res,next) {
   // userId: 1,
 	// storyId: 1,
   let shoppingcar = 0;
-  User.findOne({id: req.param("userId")}, function (err,doc) {
+  User.findOne({_id: req.param("userId")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -182,21 +182,21 @@ router.post("/add-into-shoppingcar", function (req,res,next) {
       });
     } else {
       shoppingcar = doc.shoppingcar;
-    }
-  });
-  shoppingcar.push(req.param("storyId"));
-  User.update({id: req.param("userId")}, {shoppingcar: shoppingcar}, {multi: true}, function (err,doc) {
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-        data: {}
-      });
-    } else {
-      res.json({
-        success: true,
-        message: '',
-        data: doc
+      shoppingcar.push(req.param("storyId"));
+      User.update({_id: req.param("userId")}, {shoppingcar: shoppingcar}, {multi: true}, function (err,doc) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: doc
+          });
+        }
       });
     }
   });
