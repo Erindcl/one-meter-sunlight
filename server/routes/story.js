@@ -136,24 +136,25 @@ router.post("/add-remark", function (req,res,next) {
       });
     } else {
       remarkGroup = doc.remarkGroup;
+      remarkGroup.push(req.param("remarkId"));
+      Stories.update({id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: doc
+          });
+        }
+      });
     }
   });
-  remarkGroup.push(req.param("remarkId"));
-  Stories.update({id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-        data: {}
-      });
-    } else {
-      res.json({
-        success: true,
-        message: '',
-        data: doc
-      });
-    }
-  });
+  
 });
 
 // // 故事评论删除
@@ -171,21 +172,21 @@ router.post("/remove-remark", function (req,res,next) {
       });
     } else {
       remarkGroup = doc.remarkGroup;
-    }
-  });
-  remarkGroup.splice(remarkGroup.indexOf(remarkId),1);
-  Stories.update({id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-        data: {}
-      });
-    } else {
-      res.json({
-        success: true,
-        message: '',
-        data: doc
+      remarkGroup.splice(remarkGroup.indexOf(remarkId),1);
+      Stories.update({id: req.param("storyId")}, {remarkGroup: remarkGroup}, {multi: true}, function (err,doc) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: doc
+          });
+        }
       });
     }
   });

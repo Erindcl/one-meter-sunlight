@@ -11,4 +11,4 @@ var remarkSchema = new Schema({ // 具体表模型根据数据库中而定  列�
   "against": Number,
 });
 
-module.exports = mongoose.model('Remark',remarkSchema); // 不带名字的输出本文件
+module.exports = mongoose.model('Remark',remarkSchema, 'remark'); // 不带名字的输出本文件

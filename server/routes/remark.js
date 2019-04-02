@@ -28,6 +28,7 @@ router.get("/list", function (req,res,next) {
   let skip = (page-1)*pageSize;
   let initDoc = [];
   let resultDoc = [];
+  let totalCount = 0;
   Remark.find({}, function (err,doc) {
     if (err) {
       res.json({
@@ -37,22 +38,24 @@ router.get("/list", function (req,res,next) {
       });
     } else {
       initDoc = doc;
-    }
-  });
-  initDoc.forEach((item,index) => {
-    if (req.param("id").indexOf(item.id)) {
-      resultDoc.push(item);
-    }
-  })
+      initDoc.forEach((item,index) => {
+        if (req.param("id").indexOf(item.id) != -1) {
+          resultDoc.push(item);
+        }
+      })
+      totalCount = resultDoc.length;  // 储存符合条件的remark的总记录数量
 
-  resultDoc = resultDoc.slice(skip,pageSize); // 翻页设置
+      resultDoc = resultDoc.slice(skip, skip + pageSize); // 翻页设置
 
-  res.json({
-    success: true,
-    message: '',
-    data: {
-      count: resultDoc.length,
-      list: resultDoc
+      res.json({
+        success: true,
+        message: '',
+        data: {
+          count: resultDoc.length,  // 当前返回记录的条数
+          list: resultDoc,
+          total: totalCount
+        }
+      });
     }
   });
 });
@@ -71,7 +74,8 @@ router.post("/add", function (req,res,next) {
 		"date": req.param("date"),  
 		"content": req.param("content"),
 		"support": parseInt(req.param("support")),
-		"against": parseInt(req.param("against")),
+    "against": parseInt(req.param("against")),
+    "id": 3
   });
   Remark.create(newDoc, function(err, docs){
     if (err) {

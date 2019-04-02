@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.doStoryRemoveRemark();
+    this.getRemarkList();
   }
 
   getStoryList = () => {
@@ -78,7 +78,7 @@ export default class All extends Component {
   getRemarkList = () => {
     API.getRemarkList({
       id: [1,2],
-      pageSize: 10, 
+      pageSize: 1, 
       pageNo: 1
     }).then(response =>{ 
       const { success, message, data } = response;
