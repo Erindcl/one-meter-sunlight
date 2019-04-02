@@ -14,7 +14,7 @@ export default class All extends Component {
     };
   }
   componentDidMount() {
-    this.addIntoShoppingCar();
+    this.payCorn();
   }
 
   getStoryList = () => {
@@ -235,7 +235,7 @@ export default class All extends Component {
   payCorn = () => {
     API.payCorn({
       userId: '5ca34ea975e2105aec133303',
-      corn: 101,
+      corn: 1111,
       storyIdList: ['5c8c9489c1e8f80e8003cedd']
     }).then(response =>{ 
       const { success, message, data } = response;
