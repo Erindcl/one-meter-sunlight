@@ -78,19 +78,19 @@ class Http {
   handleExcept(e){
     const status = e.name;
     if (status === 401) {
-     window.location.href='/auth/login';
+     window.location.href='/login';
       return;
     }
     if (status === 403) {
-      history.push('/auth/login');
+      history.push('/login');
       return;
     }
     if (status <= 504 && status >= 500) {
-      history.push('/auth/login');
+      history.push('/login');
       return;
     }
     if (status >= 404 && status < 422) {
-      history.push('/auth/login');
+      history.push('/login');
     }
   }
 }
