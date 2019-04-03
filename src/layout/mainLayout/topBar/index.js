@@ -28,7 +28,7 @@ export default class TopBar extends React.Component {
     const topMenu=(
       <Menu  mode="horizontal"
         selectedKeys={[menuKeys[0]]}
-        style={{ verticalAlign: 'middle',lineHeight: '62px', background:'#1A76D2'}} >
+        style={{ verticalAlign: 'middle',lineHeight: '62px', background:'#000'}} >
         {navData.length?
           navData.map((item,idx)=>(
             <Menu.Item key={item.permissionUrl.match(/\/\w*/g)[0]}>  
