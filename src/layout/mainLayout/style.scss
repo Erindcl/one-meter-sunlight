@@ -1,5 +1,8 @@
 .main-layout{
   min-height: 100vh;
+  .ant-layout-header {
+    background: #000;
+  }
   .content{
     padding:0px;
     background: #fff;

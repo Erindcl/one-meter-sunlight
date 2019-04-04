@@ -1,3 +1,5 @@
+@import 'assets/styles/global.scss';
+
 .top-bar{
   position: relative;
   color:#fff;
@@ -8,7 +10,7 @@
   }
   .logo{
     img{
-      width: 150px;
+      width: 70px;
       height: 60px;
       float: left;
       margin-left: 10px;
@@ -31,6 +33,20 @@
       a{
         color:#fff;
       }
+    }
+  }
+  .menu-ul {
+    display: flex;
+    color:#7e7e7e;
+    margin-left:60px;
+    li {
+      padding: 0px 20px;
+      height: 60px;
+      line-height: 60px;
+      // border-bottom: 4px solid $primary-color;
+    }
+    .active {
+      color: #fff;
     }
   }
 }

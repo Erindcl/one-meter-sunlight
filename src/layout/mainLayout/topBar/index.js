@@ -51,9 +51,14 @@ export default class TopBar extends React.Component {
           <img src={ FRONT_CONF.COMPANY_LOGO } alt="logo"/>
         </Link>
       </div>
-      <div className="fl top-bar-nav">
-       {topMenu}
-      </div>
+      <ul className="menu-ul">
+        <li className="active">首页</li>
+        <li>发现</li>
+        <li>个人收藏</li>
+      </ul>
+      {/* <div className="fl top-bar-nav"> */}
+       {/* {topMenu} */}
+      {/* </div> */}
       <div className="fr">
         <Dropdown overlay={selfMenu}>
           <div className="right user-moudle" style={{height:52}}>
