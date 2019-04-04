@@ -34,6 +34,14 @@
         "permissionIcon": "",
         "permissionUrl": "/user",
         "children": []
+      },
+      {
+        "id": 5,
+        "parentId": 1,
+        "permissionName": "退出登录",
+        "permissionIcon": "",
+        "permissionUrl": "/login",
+        "children": []
       }
     ]
   }

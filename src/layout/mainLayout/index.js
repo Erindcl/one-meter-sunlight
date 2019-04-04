@@ -24,13 +24,16 @@ export default class MainLayout extends Component {
   }
   componentWillReceiveProps(nextProps) {}
 
+  linkTo = (url) => {
+    this.props.history.push(url);
+  }
 
   render() {
     const {  navData,match, location } = this.props;
     return (
        <Layout className="main-layout">
        <ErrorBoundary>
-        <Header><TopBar location={location}  navData={navData.topNav} /></Header>
+        <Header><TopBar linkTo={this.linkTo} location={location}  navData={navData.topNav} /></Header>
         <Layout className="top-layout">
           <div className="content">{this.props.children}</div>
           <Foot/>
