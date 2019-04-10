@@ -110,7 +110,7 @@ export default class DataStatistics extends Component {
               <Geom type="interval" position="month*users" />
             </Chart>
           </Col>
-          <Col span={8}>
+          <Col span={8} style={{ background: '#fff' }}>
             <ul style={styles.items}>
               {dataSource.statisticData.map((item, index) => {
                 return (
