@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Grid } from '@alifd/next';
+import { Row, Col } from 'antd';
 import Footer from './components/Footer';
 import Intro from './components/Intro';
-
-const { Row, Col } = Grid;
 
 export default class UserLayout extends Component {
   render() {
@@ -11,10 +9,10 @@ export default class UserLayout extends Component {
       <div style={styles.container}>
         <div style={styles.mask} />
         <Row wrap style={styles.row}>
-          <Col l="12">
+          <Col span="12">
             <Intro />
           </Col>
-          <Col l="12">
+          <Col span="12">
             <div style={styles.form}>
               {this.props.children}
             </div>
