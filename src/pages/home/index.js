@@ -22,6 +22,11 @@ export default class Home extends Component {
   componentDidMount() {
     this.props.getHomeData({});
   }
+
+  redirectToAll = () => {
+    // console.log(this.props)
+    this.props.history.push('/all');
+  }
   
   render() {
     const {  }=this.state;
@@ -30,9 +35,9 @@ export default class Home extends Component {
         <div className="banner-part">
           <img src={require('assets/imgs/fire.jpg')}></img>
           <div className="welcome-box">
-            <h1>欢迎进入陌生人的小世界</h1>
-            <h3>遇见另一个自己</h3>
-            <Button className="btn" type="primary">探索更多</Button>
+            <h3>愿你在这能找到</h3>
+            <h1>那温暖你心房的一米阳光</h1>
+            <Button className="btn" type="primary" onClick={this.redirectToAll}>探索更多</Button>
           </div>
         </div>
         <div className="found-part">

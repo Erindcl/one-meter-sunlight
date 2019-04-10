@@ -23,17 +23,55 @@
       h1 {
         color: #fff;
         font-size: 40px;
+        margin: -10px 0px 25px;
+        // position: absolute;
+        // top: 170px;
       }
       h3 {
         color: #fff;
         font-size: 30px;
-        margin: -10px 0px 25px;
+        // position: absolute;
+        // top: 200px;
       }
       .btn {
         height: 40px;
         width: 140px;
         font-size: 13px;
+        // position: absolute;
+        // bottom: 170px;
+        // animation: updown 2s infinite;
+        // animation-timing-function: cubic-bezier(0.36, 0.72, 0.35, 0.92)
       }
+      // @keyframes fadeInDown {
+      //   from {
+      //     opacity: 0;
+      //     -webkit-transform: translate3d(0, -100%, 0);
+      //     transform: translate3d(0, -100%, 0);
+      //   }
+      
+      //   to {
+      //     opacity: 1;
+      //     -webkit-transform: translate3d(0, 0, 0);
+      //     transform: translate3d(0, 0, 0);
+      //   }
+      // }
+      
+      // .fadeInDown {
+      //   -webkit-animation-name: fadeInDown;
+      //   animation-name: fadeInDown;
+      //   animation-delay: 2s;
+      // }
+      // @keyframes updown {
+      //   0% {
+      //     bottom: 180px;
+      //   }
+      //   50% {
+      //     bottom: 170px;
+      //   }
+      //   100% {
+      //     bottom: 180px;
+      //   }
+      // }
     }
   }
   .found-part {
