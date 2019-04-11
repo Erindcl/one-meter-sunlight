@@ -31,7 +31,7 @@ const styles = {
     minWidth: '1200px',
     height: '100vh',
     backgroundImage:
-      'url(https://img.alicdn.com/tfs/TB1zsNhXTtYBeNjy1XdXXXXyVXa-2252-1500.png)',
+      `url(${require('assets/imgs/warmBg.jpg')})`,
     backgroundSize: 'cover',
     display: 'flex',
     flexDirection: 'column',

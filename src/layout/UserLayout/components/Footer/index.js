@@ -3,7 +3,7 @@ import React from 'react';
 export default () => {
   return (
     <div style={styles.footer}>
-      <div style={styles.links}>
+      {/* <div style={styles.links}>
         <a href="#" style={styles.link}>
           帮助
         </a>
@@ -13,8 +13,8 @@ export default () => {
         <a href="#" style={{ ...styles.link, marginRight: '0' }}>
           条款
         </a>
-      </div>
-      <div style={styles.copyright}>袋鼠云集团 © 2019 版权所有</div>
+      </div> */}
+      <div style={styles.copyright}>zhifei © 2019 版权所有</div>
     </div>
   );
 };

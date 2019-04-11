@@ -4,9 +4,9 @@ const LoginIntro = () => {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
-        <div style={styles.title}>内容管理系统</div>
-        <p style={styles.description}>运营与管控一体化的整合式服务平台</p>
-        <p style={styles.description}>一起解构数字世界，碰撞科技创新思想</p>
+        <div style={styles.title}>一米阳光</div>
+        <p style={styles.description}>愿你在这能找到那温暖你心房的一米阳光</p>
+        <p style={styles.description}>心灵与公益的碰撞，让世界充满温暖</p>
       </div>
     </div>
   );
