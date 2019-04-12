@@ -8,19 +8,24 @@ export default class OrderSelect extends Component {
       options: [ 
         { text: '按时间排序', key: 'time' },
         { text: '按热度排序', key: 'hot' },
-      ],
-      nowSelect: 'time'
+      ]
     };
   }
   componentDidMount() {
     
   }
+  handleClick = (item) => {
+    this.props.setParentState({
+      order: item.key
+    });
+  }
   render() {
-    const { options, nowSelect }=this.state;
+    const { options }=this.state;
+    const { order } = this.props;
     return (
       <ul className="order-select">
         {options.map((item,index) => {
-          return <li className={item.key == nowSelect ? 'activeO' : ''} index={index} key={item.key}>{item.text}</li>
+          return <li  onClick={this.handleClick.bind(this,item)}  className={item.key == order ? 'activeO' : ''} index={index} key={item.key}>{item.text}</li>
         })}
       </ul>
     );

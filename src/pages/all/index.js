@@ -10,6 +10,8 @@ export default class All extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      type: 'all',
+      order: 'time'
       
     };
   }
@@ -260,13 +262,17 @@ export default class All extends Component {
       }
     });
   }
+  
+  setSelfState = (obj) => {
+    this.setState(obj);
+  }
 
   render() {
-    const {  }=this.state;
+    const { type,  order }=this.state;
     return (
       <div className="all-container">
-        <TypeSelect />
-        <OrderSelect />
+        <TypeSelect setParentState={this.setSelfState} type={type} />
+        <OrderSelect setParentState={this.setSelfState} order={order} />
         <div className="list-box">
           <NoteList />
         </div>
