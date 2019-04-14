@@ -11,6 +11,7 @@ const Register=Loadable({loader:() => import('../pages/UserRegister'),loading: L
 const User=Loadable({loader:() => import('../pages/user'),loading: Loading});
 const All=Loadable({loader:() => import('../pages/all'),loading: Loading});
 const Article=Loadable({loader:() => import('../pages/article'),loading: Loading});
+const Contribute=Loadable({loader:() => import('../pages/contribute'),loading: Loading});
 
 // 后台管理
 const Dashboard = Loadable({loader:() => import('../pages/Dashboard'),loading: Loading});
@@ -48,6 +49,11 @@ const routerConf = [
     path: '/user',
     layout: MainLayout,
     component: User,
+  },
+  {
+    path: '/contribute',
+    layout: MainLayout,
+    component: Contribute,
   },
 
   {

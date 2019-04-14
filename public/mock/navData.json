@@ -22,9 +22,9 @@
       {
         "id": 3,
         "parentId": 1,
-        "permissionName": "我的收藏",
+        "permissionName": "投稿",
         "permissionIcon": "",
-        "permissionUrl": "/collection",
+        "permissionUrl": "/contribute",
         "children": []
       },
       {
