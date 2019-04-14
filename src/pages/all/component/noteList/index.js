@@ -8,50 +8,14 @@ export default class NoteList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listData: [{
-        imgSrc: require('assets/imgs/t1.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t2.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t4.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t3.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t6.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t7.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }]
+      
     };
   }
   componentDidMount() {
     
   }
   render() {
-    const { listData }=this.state;
+    const { listData }=this.props;
     return (
       <div className="note-list">
         <Row wrap gutter={12}>

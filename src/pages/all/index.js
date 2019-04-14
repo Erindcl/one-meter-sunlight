@@ -3,7 +3,7 @@ import TypeSelect from './component/typeSelect';
 import OrderSelect from './component/orderSelect';
 import NoteList from './component/noteList';
 import { API } from "@/api/index.js";
-import { message as Message } from 'antd';
+import { message as Message, Pagination } from 'antd';
 import "./style.scss";
 
 export default class All extends Component {
@@ -11,8 +11,47 @@ export default class All extends Component {
     super(props);
     this.state = {
       type: 'all',
-      order: 'time'
-      
+      order: 'time',
+      listData: [{
+        imgSrc: require('assets/imgs/t1.jpg'),
+        title: '一切来得太突然',
+        remark: 20,
+        watch: 34,
+        coin: 3,
+      }, {
+        imgSrc: require('assets/imgs/t2.jpg'),
+        title: '一切来得太突然',
+        remark: 20,
+        watch: 34,
+        coin: 3,
+      }, {
+        imgSrc: require('assets/imgs/t4.jpg'),
+        title: '一切来得太突然',
+        remark: 20,
+        watch: 34,
+        coin: 3,
+      }, {
+        imgSrc: require('assets/imgs/t3.jpg'),
+        title: '一切来得太突然',
+        remark: 20,
+        watch: 34,
+        coin: 3,
+      }, {
+        imgSrc: require('assets/imgs/t6.jpg'),
+        title: '一切来得太突然',
+        remark: 20,
+        watch: 34,
+        coin: 3,
+      }, {
+        imgSrc: require('assets/imgs/t7.jpg'),
+        title: '一切来得太突然',
+        remark: 20,
+        watch: 34,
+        coin: 3,
+      }],
+      pageNo: 1,
+      total: 22,
+      pageSize: 20
     };
   }
   componentDidMount() {
@@ -20,12 +59,13 @@ export default class All extends Component {
   }
 
   getStoryList = () => {
+    const { pageNo, pageSize, type, order } = this.state;
     API.getStoryList({
-      theme: 'all', // 可选
+      theme: type, // 可选
       // id: [1,2],  // 可选
-      pageSize: 1, 
-      pageNo: 1, 
-      sort: 'time'
+      pageSize: pageSize, 
+      pageNo: pageNo, 
+      sort: order
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
@@ -264,17 +304,31 @@ export default class All extends Component {
   }
   
   setSelfState = (obj) => {
-    this.setState(obj);
+    this.setState({
+      ...obj,
+      pageNo: 1
+    }, () => {
+      // this.getStoryList();
+    });
+  }
+
+  handlePageChange = (page, pageSize) => {
+    this.setState({ pageNo: page }, () => {
+      // this.getStoryList();
+    })
   }
 
   render() {
-    const { type,  order }=this.state;
+    const { type,  order, listData, pageNo, total, pageSize }=this.state;
     return (
       <div className="all-container">
         <TypeSelect setParentState={this.setSelfState} type={type} />
         <OrderSelect setParentState={this.setSelfState} order={order} />
         <div className="list-box">
-          <NoteList />
+          <NoteList listData={listData} />
+          <dvi className="pagination-box">
+            <Pagination current={pageNo} onChange={this.handlePageChange} total={total} pageSize={pageSize} />
+          </dvi>
         </div>
       </div>
     );

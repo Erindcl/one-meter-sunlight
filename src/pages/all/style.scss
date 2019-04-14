@@ -1,5 +1,12 @@
 .all-container {
   .list-box {
     background: #f2f2f2;
+    .pagination-box {
+      width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      padding: 30px 10px;
+    }
   }
 }
