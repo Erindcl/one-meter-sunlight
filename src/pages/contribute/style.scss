@@ -1,5 +1,22 @@
 .contribute-page {
-  width: 1000px;
+  padding: 50px 0px;
+  width: 800px;
   margin: 0 auto;
-  
+  line-height: 32px;
+  text-align: center;
+  position: relative;
+  h1 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 400;
+  }
+  p{
+    font-size: 16px;
+    word-wrap: break-word;
+    color: #666;
+  }
+  img {
+    position: absolute;
+    height: 25px;
+  }
 }
