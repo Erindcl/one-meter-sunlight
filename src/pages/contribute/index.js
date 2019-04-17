@@ -16,7 +16,7 @@ export default class Contribute extends Component {
     // const {  } = this.state;
     return (
       <div className="contribute-page">
-        <h1>❤ 投稿说明 ❤</h1>
+        <h1>❤ 投稿说明</h1>
         <br />
 
         <p>这个世界上每天那么多人来来往往<br />
@@ -51,7 +51,7 @@ export default class Contribute extends Component {
 
         <p>请将故事寄存到<br />
         1733412074@163.com</p>
-        <img style={{ top: 200, left: -100, width: 70, height: 20 }} src={require('assets/imgs/blr.png')}></img>
+        {/* <img style={{ top: 200, left: -100, width: 70, height: 20 }} src={require('assets/imgs/blr.png')}></img>
         <img style={{ top: 200, right: -250 }} src={require('assets/imgs/sjy.png')}></img>
         <img style={{ top: 130, left: -250 }} src={require('assets/imgs/yqg.png')}></img>
         <img style={{ top: 220, right: 90 }} src={require('assets/imgs/yqg.png')}></img>
@@ -61,7 +61,7 @@ export default class Contribute extends Component {
         <img style={{ bottom: 300, left: 0, width: 70, height: 20 }} src={require('assets/imgs/blr.png')}></img>
         <img style={{ top: 500, right: 10, width: 70, height: 20 }} src={require('assets/imgs/blr.png')}></img>
         <img style={{ bottom: 220, left: -90 }} src={require('assets/imgs/yqg.png')}></img>
-        <img style={{ bottom: 450, left: -300, width: 70, height: 20, transform: 'rotate(90deg)' }} src={require('assets/imgs/blr.png')}></img>
+        <img style={{ bottom: 450, left: -300, width: 70, height: 20, transform: 'rotate(90deg)' }} src={require('assets/imgs/blr.png')}></img> */}
       </div>
     );
   }
