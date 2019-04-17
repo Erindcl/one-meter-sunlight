@@ -4,7 +4,12 @@ import { Tabs } from 'antd';
 
 const TabPane = Tabs.TabPane;
 
-import BaseInfor from './baseInfor'
+import BaseInfor from './components/baseInfor'
+import AllInfor from './components/allInfor'
+import HistoryRemark from './components/historyRemark'
+import PaiedStory from './components/paiedStory'
+import ShopCar from './components/shopCar'
+import TopUp from './components/topUp'
 
 export default class User extends Component {
   constructor(props) {
@@ -24,17 +29,20 @@ export default class User extends Component {
   render() {
     const {  }=this.state;
     const tabsOption = [{
-      title: '我的收藏',
-      content: 'bwehreh'
+      title: '我的购物车',
+      content: <ShopCar />
     },{
       title: '基本信息',
-      content: 'vbwaseghehwer'
+      content: <AllInfor />
     },{
-      title: '已购故事',
-      content: 'vbwaseghehwer'
+      title: '历史订单',
+      content: <PaiedStory />
+    },{
+      title: '历史评论',
+      content: <HistoryRemark />
     },{
       title: '米币充值',
-      content: 'vbwaseghehwer'
+      content: <TopUp />
     }]
     return (
       <div className="user-page">
