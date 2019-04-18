@@ -1,3 +1,37 @@
 .shop-car {
-  
+  padding: 10px 20px;
+  .story-item-box {
+    display: flex;
+    align-items: center;
+    .img-box {
+      width: 120px;
+      height: 80px;
+      margin: 0px 20px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .infor {
+      min-width: 500px;
+      .title {
+        color: #333;
+        font-size: 15px;
+        height: 40px;
+        line-height: 40px;
+      }
+      .corn {
+        color: #999;
+        font-size: 13px;
+        height: 40px;
+        line-height: 40px;
+      }
+    }
+  }
+  .top-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 0px 20px;
+  }
 }
