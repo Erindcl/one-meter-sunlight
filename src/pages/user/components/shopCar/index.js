@@ -35,7 +35,8 @@ export default class ShopCar extends Component {
         corn: '20',
         imgSrc: require('assets/imgs/t4.jpg'),
       }],
-      visible: true,
+      visible: false,
+      orderDetails: [],
       password: '',
     };
   }
@@ -50,7 +51,6 @@ export default class ShopCar extends Component {
   }
 
   handleCheckboxChange = (index) => {
-    console.log(`checked = ${index}`);
     const { checkedIds } = this.state;
     let temIndex = checkedIds.indexOf(index);
     if (temIndex != -1) {
@@ -73,12 +73,15 @@ export default class ShopCar extends Component {
   }
 
   handlePayBtnClick = () => {
-    console.log("this.state.checkedIds")
-    console.log(this.state.checkedIds)
-  }
-
-  showModal = () => {
+    let orderDetails = [];
+    const { checkedIds, storyData } = this.state;
+    storyData.forEach((item) => {
+      if (checkedIds.indexOf(item.id) != -1) {
+        orderDetails.push(item.title);
+      }
+    })
     this.setState({
+      orderDetails: orderDetails,
       visible: true,
     });
   }
@@ -112,7 +115,7 @@ export default class ShopCar extends Component {
   }
 
   render() {
-    const { pageNo, total, pageSize, storyData, checkedIds, visible, password }=this.state;
+    const { pageNo, total, pageSize, storyData, checkedIds, visible, password, orderDetails }=this.state;
     return (
       <div className="shop-car">
         <dvi className="top-box">
@@ -153,7 +156,9 @@ export default class ShopCar extends Component {
         >
           <Row getter={16}>
             <Col style={{ textAlign: 'right' }} span={6}>本次订单包括：</Col>
-            <Col span={16}>咖啡店那一角的风景<br />咖啡店那一角的风景<br />咖啡店那一角的风景<br />咖啡店那一角的风景</Col>
+            <Col span={16}>{orderDetails.map((item,index) => {
+              return index == 0 ? item : (<span><br />{item}</span>)
+            })}</Col>
           </Row>
           <Row style={{ marginTop: '20px' }}>
             <Col style={{ textAlign: 'right' }} span={6}>支付密码：</Col>
