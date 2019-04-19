@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./style.scss";
-import { Card, Pagination, Button, Checkbox } from 'antd';
+import { Card, Pagination, Button, Checkbox, Modal, Row, Col, Input, message as Message } from 'antd';
 
 export default class ShopCar extends Component {
   constructor(props) {
@@ -34,7 +34,9 @@ export default class ShopCar extends Component {
         title: '咖啡店那一角的风景',
         corn: '20',
         imgSrc: require('assets/imgs/t4.jpg'),
-      }]
+      }],
+      visible: true,
+      password: '',
     };
   }
   componentDidMount() {
@@ -75,8 +77,42 @@ export default class ShopCar extends Component {
     console.log(this.state.checkedIds)
   }
 
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleOk = (e) => {
+    const { password } = this.state;
+    if (password == '') {
+      Message.warning('请输入支付密码');
+    } else {
+      if (password != '123456') {
+        Message.error('支付密码错误，请重新输入');
+      } else {
+        // 请求购买故事
+        this.setState({
+          visible: false,
+          password: ''
+        });
+      }
+    }
+  }
+
+  handleCancel = (e) => {
+    this.setState({
+      visible: false,
+      password: ''
+    });
+  }
+
+  handleInputChange = (e) => {
+    this.setState({ password: e.target.value })
+  }
+
   render() {
-    const { pageNo, total, pageSize, storyData, checkedIds }=this.state;
+    const { pageNo, total, pageSize, storyData, checkedIds, visible, password }=this.state;
     return (
       <div className="shop-car">
         <dvi className="top-box">
@@ -107,6 +143,25 @@ export default class ShopCar extends Component {
             </div>
           </Card>
         ))}
+        <Modal
+          title="确认订单并支付"
+          visible={visible}
+          okText="确定"
+          cancelText="取消"
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <Row getter={16}>
+            <Col style={{ textAlign: 'right' }} span={6}>本次订单包括：</Col>
+            <Col span={16}>咖啡店那一角的风景<br />咖啡店那一角的风景<br />咖啡店那一角的风景<br />咖啡店那一角的风景</Col>
+          </Row>
+          <Row style={{ marginTop: '20px' }}>
+            <Col style={{ textAlign: 'right' }} span={6}>支付密码：</Col>
+            <Col span={16}>
+              <Input onChange={this.handleInputChange} value={password} placeholder="请输入支付密码" type="password" />
+            </Col>
+          </Row>
+        </Modal>
       </div>
     );
   }
