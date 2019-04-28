@@ -3,7 +3,7 @@ import TypeSelect from './component/typeSelect';
 import OrderSelect from './component/orderSelect';
 import NoteList from './component/noteList';
 import { API } from "@/api/index.js";
-import { message as Message, Pagination } from 'antd';
+import { message as Message } from 'antd';
 import "./style.scss";
 
 export default class All extends Component {

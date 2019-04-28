@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Button, Divider, Comment, Tooltip, List, Pagination } from 'antd';
 import moment from 'moment';
+import { API } from "@/api/index.js";
+import { message as Message } from 'antd';
 import "./style.scss";
 
 export default class Article extends Component {
@@ -33,42 +35,64 @@ export default class Article extends Component {
             </Tooltip>
           ),
         },
-      ]
-      
+      ],
+      detailInfor: {},
     };
   }
   componentDidMount() {
-    
+    window.scrollTo(0, 0)
+    this.setState({ id: this.props.match.params.id }, () => {
+      this.getStoryDetail();
+    })
   }
+
+  getStoryDetail = () => {
+    API.getStoryDetail({
+      storyId: this.state.id
+    }).then(response =>{ 
+      const { success, message, data } = response;
+      if (success) {
+        this.setState({
+          detailInfor: data || {}
+        })
+      } else {
+        Message.error(message);
+      }
+    });
+  }
+
   render() {
-    const { imgsrc, remarkData } = this.state;
+    const { imgsrc, remarkData, detailInfor } = this.state;
+    let realImgSrc = detailInfor.coverPic ? require(`assets/imgs/article/${detailInfor.coverPic}`) : '';
+    let contentArray = detailInfor.contentPart ? detailInfor.contentPart.split('\n') : [];
     return (
       <div className="article-container">
-        <img src={imgsrc} className="cover-img"></img>
+        <div className="cover-img" style={{ backgroundImage: `url(${realImgSrc})`, 
+        backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', backgroundAttachment: 'fixed'}}></div>
+        {/* <img src={realImgSrc} className="cover-img"></img> */}
         <div className="cover-mask">
           <div className="artcle-infor">
-            <div className="title">一切都来的太突然</div>
+            <div className="title">{detailInfor.title}</div>
             <div className="des">
-              <span>浏览：20</span>
-              <span>评论：10</span>
-              <span>收藏：10</span>
-              <span>币：2</span>
+              <span>浏览：{detailInfor.watchCount}</span>
+              <span>评论：{detailInfor.remarkCount}</span>
+              <span>币：{detailInfor.payCorn}</span>
             </div>
             <div className="des">
-              <span>2019-03-15</span>
-              <span>BY：小囧囧</span>
+              <span>{detailInfor.date}</span>
+              <span>BY：{detailInfor.auther}</span>
             </div>
           </div>
         </div>
         <div className="main">
           <div className="article-text">
-            <p>你羡慕朋友圈中那些富丽堂皇，高贵大气的建筑下有一位你并不算太了解的朋友。也羡慕着两情相悦的伴侣可以共饮一杯水，共眠一头枕。</p>
-            <p>还羡慕着年少有成，有房有车，物质生活与你相差十万八千里的有志青年。羡慕这羡慕那，你会不会感觉身心疲惫，累觉不爱？感觉一切美好的猖狂都不属于你。</p>
-            <p>你只是随着人流而淹没在人流当中，恍若局外人。</p>
-            <p>可你从不曾体会过，当你在羡慕别人的同时别人也正在羡慕着你......</p>
+            {contentArray.length ==  0 ? '暂无内容，请稍后访问' : contentArray.map((item,index) => (
+              <p key={index}>{item}</p>
+            ))}
           </div>
           <div className="btn-box">
-            <Button type="primary" disabled style={{ marginRight: 20 }}>已收藏</Button>
+            <Button type="primary" style={{ marginRight: 20 }}>添加购物车</Button>
+            {/* <Button type="primary" disabled style={{ marginRight: 20 }}>已添加购物车</Button> */}
             <Button type="primary">阅读更多</Button>
           </div>
           <Divider orientation="left" style={{ fontSize: 20 }}>评论</Divider>
