@@ -8,51 +8,7 @@ import "./style.scss";
 
 export default class All extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      type: 'all',
-      order: 'time',
-      listData: [{
-        imgSrc: require('assets/imgs/t1.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t2.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t4.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t3.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t6.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }, {
-        imgSrc: require('assets/imgs/t7.jpg'),
-        title: '一切来得太突然',
-        remark: 20,
-        watch: 34,
-        coin: 3,
-      }],
-      pageNo: 1,
-      total: 22,
-      pageSize: 20
-    };
+    
   }
   componentDidMount() {
     // this.payCorn();

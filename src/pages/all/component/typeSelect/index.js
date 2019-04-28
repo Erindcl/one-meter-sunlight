@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from 'antd';
 import "./style.scss";
 
 export default class TypeSelect extends Component {
@@ -34,7 +35,8 @@ export default class TypeSelect extends Component {
     return (
       <ul className="type-select">
         {options.map((item,index) => {
-          return <li onClick={this.handleClick.bind(this,item)} className={item.key == type ? 'activeT' : ''} index={index} key={item.key}>{item.text}</li>
+          // return <li onClick={this.handleClick.bind(this,item)} className={item.key == type ? 'activeT' : ''} index={index} key={item.key}>{item.text}</li>
+          return <Button className="type-btn" type={item.key == type ? 'primary' : 'default'} onClick={this.handleClick.bind(this,item)} index={index} key={item.key}>{item.text}</Button>
         })}
       </ul>
     );

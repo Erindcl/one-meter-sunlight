@@ -65,7 +65,7 @@ router.get("/list", function (req,res,next) {
       if (req.param("theme")) {
         if (req.param("theme") != 'all') {
           initDoc.forEach((item,index) => {
-            if (item.tabs.indexOf(req.param("theme"))) {
+            if (item.tabs.indexOf(req.param("theme")) != -1) {
               resultDoc.push(item);
             }
           })
@@ -97,7 +97,7 @@ router.get("/list", function (req,res,next) {
         data: {
           count: resultDoc.length,
           list: resultDoc,
-          totle: totalCount
+          total: totalCount
         }
       });
     }
