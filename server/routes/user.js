@@ -51,22 +51,8 @@ router.post("/login", function (req,res,next) {
 router.post("/register", function (req,res,next) {
   // userName: ''
 	// email: '',
-	// password: ''
-  var newDoc = ({
-    "name": req.param("userName"),
-    "email": req.param("email"),
-    "password": req.param("password"),
-    "payPassword": req.param("password"),  // 默认为账号密码 可修改
-    "headPic" : "hp1.jpg",
-    "bgPic" : "ubg1.jpg",
-    "intro": '暂无简介~',
-    "corn": 0,
-    "shoppingcar": [],  // 购物车列表
-    "bought": [],
-    "postRemarks": [], 
-    "type": 'ordinary'
-  });
-  User.create(newDoc, function(err, docs){
+  // password: ''
+  User.findOne({email: req.param("email")}, function (err,doc) {
     if (err) {
       res.json({
         success: false,
@@ -74,11 +60,43 @@ router.post("/register", function (req,res,next) {
         data: {}
       });
     } else {
-      res.json({
-        success: true,
-        message: '',
-        data: docs
-      });
+      if (doc) {
+        res.json({
+          success: false,
+          message: '该用户已存在，请重新输入注册信息',
+          data: {}
+        });
+      } else {
+        var newDoc = ({
+          "name": req.param("userName"),
+          "email": req.param("email"),
+          "password": req.param("password"),
+          "payPassword": req.param("password"),  // 默认为账号密码 可修改
+          "headPic" : "hp1.jpg",
+          "bgPic" : "ubg1.jpg",
+          "intro": '暂无简介~',
+          "corn": 0,
+          "shoppingcar": [],  // 购物车列表
+          "bought": [],
+          "postRemarks": [], 
+          "type": 'ordinary'
+        });
+        User.create(newDoc, function(err, docs){
+          if (err) {
+            res.json({
+              success: false,
+              message: err.message,
+              data: {}
+            });
+          } else {
+            res.json({
+              success: true,
+              message: '',
+              data: docs
+            });
+          }
+        });
+      }
     }
   });
 });

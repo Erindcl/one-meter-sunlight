@@ -61,6 +61,12 @@ class UserRegister extends Component {
           this.props.history.push('/login');
         } else {
           Message.error(message);
+          this.props.form.setFieldsValue({
+            username: '',
+            email: '',
+            newPassword: '',
+            passwordConfirm: '',
+          })
         }
       });
     });
