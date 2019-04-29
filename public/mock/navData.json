@@ -42,6 +42,22 @@
         "permissionIcon": "",
         "permissionUrl": "/login",
         "children": []
+      },
+      {
+        "id": 6,
+        "parentId": 1,
+        "permissionName": "登录",
+        "permissionIcon": "",
+        "permissionUrl": "/login",
+        "children": []
+      },
+      {
+        "id": 7,
+        "parentId": 1,
+        "permissionName": "注册",
+        "permissionIcon": "",
+        "permissionUrl": "/register",
+        "children": []
       }
     ]
   }

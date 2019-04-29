@@ -29,7 +29,7 @@ class UserLogin extends Component {
       API.userLogin(values).then(response =>{ 
         const { success, message, data } = response;
         if (success) {
-          message.success('登录成功');
+          Message.success('登录成功');
           localDb.set('email',data.email);
           if (data.type == 'admin') {
             this.props.history.push('/dashboard/monitor');
