@@ -12,7 +12,8 @@ var userSchema = new Schema({ // 具体表模型根据数据库中而定  列名
   "corn": Number,
   "shoppingcar": Array,  // 购物车列表
   "bought": Array,
-  "postRemarks": Array
+  "postRemarks": Array,
+  "type": String
 });
 
 module.exports = mongoose.model('User',userSchema,'user'); // 不带名字的输出本文件

@@ -30,7 +30,6 @@ router.post("/login", function (req,res,next) {
         data: {}
       });
     } else {
-      console.log(doc)
       if (doc) {
         res.json({
           success: true,
@@ -58,13 +57,14 @@ router.post("/register", function (req,res,next) {
     "email": req.param("email"),
     "password": req.param("password"),
     "payPassword": req.param("password"),  // 默认为账号密码 可修改
-    "headPic": '',
-    "bgPic": '',
+    "headPic" : "hp1.jpg",
+    "bgPic" : "ubg1.jpg",
     "intro": '暂无简介~',
     "corn": 0,
     "shoppingcar": [],  // 购物车列表
     "bought": [],
     "postRemarks": [], 
+    "type": 'ordinary'
   });
   User.create(newDoc, function(err, docs){
     if (err) {

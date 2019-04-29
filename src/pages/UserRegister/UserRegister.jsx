@@ -1,7 +1,9 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Input, Button, message, Icon } from 'antd';
+import { Form, Input, Button, Icon } from 'antd';
+import { API } from "@/api/index.js";
+import { message as Message } from 'antd';
 
 class UserRegister extends Component {
   static displayName = 'UserRegister';
@@ -48,8 +50,19 @@ class UserRegister extends Component {
         console.log('errors', errors);
         return;
       }
-      message.success('注册成功');
-      this.props.history.push('/login');
+      API.userRegister({
+        userName: values.username,
+        email: values.email,
+        password: values.newPassword
+      }).then(response =>{ 
+        const { success, message, data } = response;
+        if (success) {
+          Message.success('注册成功, 快去登录吧！');
+          this.props.history.push('/login');
+        } else {
+          Message.error(message);
+        }
+      });
     });
   };
 
