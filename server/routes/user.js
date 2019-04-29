@@ -21,7 +21,7 @@ mongoose.connection.on("disconnected", function () {
 // 登录  可直接获取用户信息
 router.post("/login", function (req,res,next) {
   // userName: '',
-	// password: ''
+  // password: ''
   User.findOne({email: req.param("email"), password: req.param("password")}, function (err,doc) {
     if (err) {
       res.json({
@@ -30,6 +30,7 @@ router.post("/login", function (req,res,next) {
         data: {}
       });
     } else {
+      console.log(doc)
       if (doc) {
         res.json({
           success: true,

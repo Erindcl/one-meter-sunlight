@@ -13,4 +13,4 @@ const store = createStore(
   combineReducers({ routing: routerReducer, ...appReducer }),
   process.env.NODE_ENV=='production' ? applyMiddleware(...middlewares): composeWithDevTools(applyMiddleware(...middlewares))
 )
-export default   store;
+export default store;

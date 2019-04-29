@@ -27,6 +27,9 @@
         }
       }
     }
+    // .comment-list {
+    //   padding: 20px 0px;
+    // }
   }
   .main {
     width: 800px;
@@ -36,6 +39,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    .reamrk-btn-box {
+      // padding: 10px 0px;
+      margin: -15px 0px 0px;
+      width: 100%;
+      display: flex;
+      flex-direction: row-reverse;
+    }
   }
   
 }

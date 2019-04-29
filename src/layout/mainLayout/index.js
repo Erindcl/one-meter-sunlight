@@ -21,6 +21,9 @@ export default class MainLayout extends Component {
 
   componentDidMount() {
     this.props.getNavData({});
+    // this.props.getUserData({});
+    console.log("this.props")
+    console.log(this.props)
   }
   componentWillReceiveProps(nextProps) {}
 

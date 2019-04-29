@@ -1,5 +1,6 @@
 import {globalType} from './constant';
 import { API } from "@/api/index.js";
+import { message as Message } from 'antd';
 
 const userData = (data) => ({
   type: globalType.GET_USER_DATA,
@@ -7,11 +8,19 @@ const userData = (data) => ({
 })
 export const getUserData = (params) => async (dispatch, getState) => {
   try {
-    API.getUserData(params).then(response =>{ 
-      if (response.success) {
-        dispatch(userData(response.data));
+    // API.getUserData(params).then(response =>{ 
+    //   if (response.success) {
+    //     dispatch(userData(response.data));
+    //   } else {
+    //     //返回失败
+    //   }
+    // });
+    API.getUserBaseInfor(params).then(response =>{ 
+      const { success, message, data } = response;
+      if (success) {
+        dispatch(userData(data));
       } else {
-        //返回失败
+        Message.error(message);
       }
     });
   } catch (error) {

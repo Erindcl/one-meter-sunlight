@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Button, Divider, Comment, Empty, List, Pagination } from 'antd';
+import { Button, Divider, Comment, Empty, List, Pagination, Input } from 'antd';
 import moment from 'moment';
 import { API } from "@/api/index.js";
 import { message as Message } from 'antd';
 import "./style.scss";
+
+const { TextArea } = Input;
 
 export default class Article extends Component {
   constructor(props) {
@@ -11,7 +13,8 @@ export default class Article extends Component {
     this.state = {
       remarkData: [],
       detailInfor: {},
-      total: 0
+      total: 0,
+      isTextAreaShow: false,
     };
   }
   componentDidMount() {
@@ -57,8 +60,16 @@ export default class Article extends Component {
     });
   }
 
+  addRemark = () => {
+    // 发布评论
+  }
+
+  showTextarea = () => {
+    this.setState({ isTextAreaShow: true })
+  }
+
   render() {
-    const { remarkData, detailInfor, total } = this.state;
+    const { remarkData, detailInfor, total, isTextAreaShow } = this.state;
     let realImgSrc = detailInfor.coverPic ? require(`assets/imgs/article/${detailInfor.coverPic}`) : '';
     let contentArray = detailInfor.contentPart ? detailInfor.contentPart.split('\n') : [];
     return (
@@ -91,7 +102,13 @@ export default class Article extends Component {
             <Button type="primary">阅读更多</Button>
           </div>
           <Divider orientation="left" style={{ fontSize: 20 }}>评论</Divider>
+          {isTextAreaShow && <TextArea placeholder="请输入评论" rows={5} style={{ marginBottom: '35px', padding: '10px 15px' }} />}
+          <div className="reamrk-btn-box">
+            {!isTextAreaShow && <Button type="primary" onClick={this.showTextarea}>发布评论</Button>}
+            {isTextAreaShow && <Button type="primary" onClick={this.addRemark}>发布</Button>}
+          </div>
           <List
+            style={{ padding: '20px 0px' }}
             className="comment-list"
             itemLayout="horizontal"
             dataSource={remarkData.length > 0 ?remarkData : [1]}
