@@ -4,10 +4,16 @@ import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo';
 import './scss/base.scss';
+import localDb from '@/utils/localDb.js';
 
 const { Header } = Layout;
 
 export default class HeaderPage extends PureComponent {
+
+  clearLocalDB = () => {
+    localDb.clear();
+  }
+
   render() {
     const { className, style } = this.props;
 
@@ -28,7 +34,7 @@ export default class HeaderPage extends PureComponent {
                 </Link>
               </li>
               <li className="user-profile-menu-item">
-                <Link to="/user/login">
+                <Link to="/login" onClick={this.clearLocalDB}>
                   <Icon type="export" />
                   退出
                 </Link>
