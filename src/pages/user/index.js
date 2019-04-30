@@ -48,7 +48,7 @@ export default class User extends Component {
       content: <PaiedStory key={userData.bought.length} userData={userData} />
     },{
       title: '历史评论',
-      content: <HistoryRemark userData={userData} />
+      content: <HistoryRemark key={userData.postRemarks.length} userData={userData} />
     },{
       title: '米币充值',
       content: <TopUp userData={userData} />
