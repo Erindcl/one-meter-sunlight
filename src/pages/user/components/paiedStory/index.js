@@ -40,7 +40,7 @@ export default class PaiedStory extends Component {
 
   handlePageChange = (page, pageSize) => {
     this.setState({ pageNo: page }, () => {
-      // this.getStoryList();
+      this.getStoryList();
     })
   }
 
