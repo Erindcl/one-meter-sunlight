@@ -124,17 +124,12 @@ router.get("/base-infor", function (req,res,next) {
 // 修改基本信息
 router.post("/update-infor", function (req,res,next) {
   let updateDoc = {
-    "userName": req.param("userName"),
-    "email": req.param("email"),
+    "name": req.param("userName"),
     "password": req.param("password"),
-    "payPassword": req.param("payPassword"),  // 默认为账号密码 可修改
+    "payPassword": req.param("password"),  // 默认为账号密码 可修改
     "headPic": req.param("headPic"),
     "bgPic": req.param("bgPic"),
     "intro": req.param("intro"),
-    "corn": parseInt(req.param("corn")),
-    "shoppingcar": req.param("shoppingcar"),  // 购物车列表
-    "bought": req.param("bought"),
-    "postRemarks": req.param("postRemarks"), 
   };
   User.update({_id: req.param("userId")}, { ...updateDoc }, {multi: true}, function (err,doc) {
     if (err) {

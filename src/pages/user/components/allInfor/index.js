@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Upload, Form, Input, Row, Col, Button, message } from 'antd';
+import { Upload, Form, Input, Row, Col, Button } from 'antd';
 import "./style.scss";
+import { API } from "@/api/index.js";
+import { message as Message } from 'antd';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -8,14 +10,7 @@ class AllInfor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allInfor: {
-        bgPic: require('assets/imgs/t6.jpg'),
-        headPic: require('assets/imgs/t7.jpg'),
-        email: 'XXX@163.com',
-        name: 'XXX',
-        password: '123456',
-        intro: 'XXX',
-      }
+      
     };
   }
   componentDidMount() {
@@ -42,20 +37,34 @@ class AllInfor extends Component {
         console.log('errors', errors);
         return;
       }
-
+      // API.updateUserInfor({
+      //   userId: this.props.userData._id,
+      //   headPic: 'xxx',
+      //   bgPic: 'xxx',
+      //   userName: values.name,
+      //   password: values.password,
+      //   intro: values.intro,
+      // }).then(response =>{ 
+      //   const { success, message, data } = response;
+      //   if (success) {
+      //     console.log(data);
+      //   } else {
+      //     Message.error(message);
+      //   }
+      // });
       console.log('values:', values);
-      message.success('添加成功');
+      Message.success('修改成功');
     });
   };
 
   beforeUpload = (file) => {
     const isJPG = file.type === 'image/jpeg';
     if (!isJPG) {
-      message.error('You can only upload JPG file!');
+      Message.error('You can only upload JPG file!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+      Message.error('Image must smaller than 2MB!');
     }
     return isJPG && isLt2M;
   }
@@ -67,7 +76,7 @@ class AllInfor extends Component {
   }
 
   render() {
-    const { allInfor }=this.state;
+    const { userData }=this.props;
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: {
@@ -77,6 +86,9 @@ class AllInfor extends Component {
         span: 12,
       },
     };
+
+    let realUBP = require(`assets/imgs/user/${userData.bgPic}`);
+    let realHP = require(`assets/imgs/user/${userData.headPic}`);
     return (
       <div className="all-infor">
         <Form>
@@ -92,7 +104,7 @@ class AllInfor extends Component {
                   beforeUpload={this.beforeUpload}
                   onChange={this.handleChange}
                 >
-                  <img style={{ height: 200, width: 300 }} src={allInfor.bgPic} alt="bgPic" />
+                  <img style={{ height: 200, width: 300 }} src={realUBP} alt="bgPic" />
                 </Upload>
               </FormItem>
             </Col>
@@ -111,7 +123,7 @@ class AllInfor extends Component {
                   beforeUpload={this.beforeUpload}
                   onChange={this.handleChange}
                 >
-                  <img style={{ height: 150, width: 150 }} src={allInfor.headPic} alt="headPic" />
+                  <img style={{ height: 150, width: 150 }} src={realHP} alt="headPic" />
                 </Upload>
               </FormItem>
             </Col>
@@ -121,7 +133,7 @@ class AllInfor extends Component {
             <Col span="20">
               <FormItem label="昵称" {...formItemLayout}>
                 {getFieldDecorator('name', {
-                  initialValue: allInfor.name,
+                  initialValue: userData.name,
                   rules: [{
                     required: true, message: '必填项',
                   }],
@@ -136,7 +148,7 @@ class AllInfor extends Component {
             <Col span="20">
               <FormItem label="邮件" {...formItemLayout}>
                 {getFieldDecorator('email', {
-                  initialValue: allInfor.email,
+                  initialValue: userData.email,
                   rules: [{
                     required: true, message: '请输入正确的邮箱', 
                     type: 'email'
@@ -152,7 +164,7 @@ class AllInfor extends Component {
             <Col span="20">
               <FormItem label="密码" {...formItemLayout}>
                 {getFieldDecorator('password', {
-                  initialValue: allInfor.password,
+                  initialValue: userData.password,
                   rules: [{
                     required: true, message: '必填项'
                   }],
@@ -167,7 +179,7 @@ class AllInfor extends Component {
             <Col span="20">
               <FormItem label="简介" {...formItemLayout}>
                 {getFieldDecorator('intro', {
-                  initialValue: allInfor.intro,
+                  initialValue: userData.intro,
                 })(
                   <TextArea rows={4} />
                 )}
