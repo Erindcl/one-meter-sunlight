@@ -45,7 +45,7 @@ export default class User extends Component {
       content: <AllInfor userData={userData} />
     },{
       title: '历史订单',
-      content: <PaiedStory userData={userData} />
+      content: <PaiedStory key={userData.bought.length} userData={userData} />
     },{
       title: '历史评论',
       content: <HistoryRemark userData={userData} />

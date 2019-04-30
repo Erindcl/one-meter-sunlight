@@ -19,10 +19,10 @@ export default class PaiedStory extends Component {
   }
 
   getStoryList = () => {
-    const { shoppingcar } = this.props.userData;
+    const { bought } = this.props.userData;
     const { pageNo, pageSize } = this.state;
     API.getStoryList({
-      id: shoppingcar,  // 可选
+      id: bought,  // 可选
       pageSize: pageSize, 
       pageNo: pageNo, 
     }).then(response =>{ 
