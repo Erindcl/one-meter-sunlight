@@ -22,6 +22,7 @@ export default class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeKey: '1'
     };
   }
   componentDidMount() {
@@ -31,12 +32,13 @@ export default class User extends Component {
     this.props.getUserData({ email: localDb.get('email') });
   }
 
-  callback = () => {
-
+  callback = (activeKey) => {
+    this.setState({ activeKey: activeKey });
   }
 
   render() {
     const { userData } = this.props;
+    const { activeKey } = this.state;
     const tabsOption = [{
       title: '我的购物车',
       content: <ShopCar key={userData.shoppingcar.length} reGetUserData={this.reGetUserData} userData={userData} />
@@ -51,13 +53,13 @@ export default class User extends Component {
       content: <HistoryRemark key={userData.postRemarks.length} userData={userData} />
     },{
       title: '米币充值',
-      content: <TopUp userData={userData} />
+      content: <TopUp key={userData.corn} reGetUserData={this.reGetUserData} userData={userData} />
     }]
     return (
       <div className="user-page">
         <BaseInfor userData={userData} />
         <div className="tabs-box">
-          <Tabs defaultActiveKey="1" onChange={this.callback}>
+          <Tabs activeKey={activeKey} onChange={this.callback}>
             {tabsOption.map((item,index) => (
               <TabPane tab={item.title} key={index}>{item.content}</TabPane>
             ))}

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./style.scss";
 import { Row, Col, Card, Button, Modal } from 'antd';
+import { API } from "@/api/index.js";
+import { message as Message } from 'antd';
 
 const confirm = Modal.confirm;
 const option = [
@@ -24,14 +26,27 @@ export default class TopUp extends Component {
   }
 
   showConfirm = () => {
-    let currentItem = option[this.state.selectedOne];
+    let currentItem = option[this.state.selectedOne - 1];
+    const { _id } = this.props.userData;
+    let _this = this;
     confirm({
       title: `确认购买 米币${currentItem.corn}?`,
       content: `需要您支付 ${currentItem.rmb} RMB`,
       okText: '确认',
       cancelText: '取消',
       onOk() {
-        // 请求购买米币
+        API.putCorn({
+          userId: _id,
+          corn: currentItem.corn
+        }).then(response =>{ 
+          const { success, message, data } = response;
+          if (success) {
+            Message.success('购买成功');
+            _this.props.reGetUserData();
+          } else {
+            Message.error(message);
+          }
+        });
       },
       onCancel() {
         
