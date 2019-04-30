@@ -12,20 +12,23 @@ export default class BaseInfor extends Component {
     
   }
   render() {
-    const {  }=this.state;
+    const { userData }=this.props;
+    let realUBP = require(`assets/imgs/user/${userData.bgPic}`);
+    let realHP = require(`assets/imgs/user/${userData.headPic}`);
     return (
       <div className="base-infor">
-        <img className="user-cover" src={require('assets/imgs/t6.jpg')}></img>
+        <div className="user-cover" style={{ backgroundImage: `url(${realUBP})`, 
+        backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', backgroundAttachment: 'fixed'}}></div>
         <div class="infor-box">
           <div className="user-hp-box">
-            <img src={require('assets/imgs/t7.jpg')}></img>
+            <img src={realHP}></img>
           </div>
           <div className="user-infor">
             <div className="name">
-              我不知道叫啥名
-              <span>$54</span>
+              {userData.name}
+              <span>${userData.corn}</span>
             </div>
-            <div className="intro">我很懒，没得简介的，哈哈哈哈</div>
+            <div className="intro">{userData.intro}</div>
           </div>
         </div>
       </div>
