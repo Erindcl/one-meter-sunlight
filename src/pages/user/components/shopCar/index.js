@@ -144,23 +144,23 @@ export default class ShopCar extends Component {
     })
     return (
       <div className="shop-car">
-        {storyData.length > 0 ? <dvi className="top-box">
+        {storyData.length > 0 && <dvi className="top-box">
           <div className="btn-box">
             {storyData.length != checkedIds.length && <Button type="primary" onClick={this.handleSelectAll.bind(this, 'all')} style={{ marginRight: '10px' }}>全选</Button>}
             {storyData.length == checkedIds.length && <Button type="primary" onClick={this.handleSelectAll.bind(this, 'cancel')} style={{ marginRight: '10px' }}>取消全选</Button>}
             <Button type="primary" onClick={this.handlePayBtnClick} disabled={checkedIds.length > 0 ? false : true}>购买</Button>
           </div>
           <Pagination current={pageNo} onChange={this.handlePageChange} total={total} pageSize={pageSize} />
-        </dvi> : ''}
+        </dvi>}
         {storyData.length > 0 ? storyData.map((item,index) => {
-          let realImg = require(`assets/imgs/article/${detailInfor.coverPic}`);
+          let realImg = require(`assets/imgs/article/${item.coverPic}`);
           return (
             <Card
               type="inner"
               key={index}
               style={index == 0 ? {} : { marginTop: 16 }}
               title={item.date}
-              extra={<a href="#">查看</a>}
+              extra={<a href={`/all/${item._id}`}>查看</a>}
             >
               <div className="story-item-box">
                 <Checkbox checked={checkedIds.indexOf(item.id) == -1 ? false : true} onChange={this.handleCheckboxChange.bind(this, item.id)}></Checkbox>
