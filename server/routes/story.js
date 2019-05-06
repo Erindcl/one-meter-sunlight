@@ -194,4 +194,38 @@ router.post("/remove-remark", function (req,res,next) {
   });
 });
 
+// 添加故事浏览量
+router.post("/add-watch", function (req,res,next) {
+  // id: 1
+  let watchCount = 0;
+  Stories.findOne({_id: req.param("id")}, function (err,doc) {
+    if (err) {
+      res.json({
+        success: false,
+        message: err.message,
+        data: {}
+      });
+    } else {
+      watchCount = doc.watchCount;
+      watchCount++;
+      Stories.update({_id: req.param("id")}, {watchCount: watchCount}, {multi: true}, function (err,doc) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: doc
+          });
+        }
+      });
+    }
+  });
+  
+});
+
 module.exports = router;

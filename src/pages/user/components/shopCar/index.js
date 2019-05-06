@@ -111,7 +111,7 @@ export default class ShopCar extends Component {
         }).then(response =>{ 
           const { success, message, data } = response;
           if (success) {
-            Message.success(购买成功);
+            Message.success('购买成功');
             this.setState({
               visible: false,
               password: ''

@@ -68,6 +68,10 @@ export default {
     method:'post',
     url:'/api/story/remove-remark'
   },
+  doStoryAddWatch:{
+    method:'post',
+    url:'/api/story/add-watch'
+  },
 
   //评论相关
   getRemarkList:{
