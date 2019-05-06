@@ -19,8 +19,8 @@ export default class HistoryRemark extends Component {
     const { postRemarks } = this.props.userData;
     API.getRemarkList({
       id: postRemarks, 
-      pageSize: 1, 
-      pageNo: 500
+      pageSize: 100, 
+      pageNo: 1
     }).then(response =>{ 
       const { success, message, data } = response;
       if (success) {
@@ -42,7 +42,7 @@ export default class HistoryRemark extends Component {
           </Timeline.Item>
           {remarks.map((item,index) => (
             <Timeline.Item dot={<Icon type="check-circle" style={{ fontSize: '16px' }} />} key={index}>
-              <div className="date">您于 {item.date} 对 {item.story} 评论到</div>
+              <div className="date">您于 {item.date} 评论到</div>
               <div className="content">{item.content}</div>
             </Timeline.Item>
           ))}

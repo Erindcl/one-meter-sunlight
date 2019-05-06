@@ -80,6 +80,7 @@ router.post("/add", function (req,res,next) {
       var newDoc = ({
         "userName": req.param("userName"),
         "userId": parseInt(req.param("userId")),
+        "userHp": req.param("userHp"),
         "date": req.param("date"),  
         "content": req.param("content"),
         "support": parseInt(req.param("support")),

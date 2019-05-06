@@ -5,6 +5,7 @@ var remarkSchema = new Schema({ // 具体表模型根据数据库中而定  列�
   "id" : Number,
   "userName": String,
   "userId": Number,
+  "userHp": String,
   "date": String,
   "content": String,
   "support": Number,

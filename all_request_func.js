@@ -45,6 +45,19 @@ export default class All extends Component {
     });
   }
 
+  doStoryAddWatch = () => {
+    API.doStoryAddWatch({
+      id: 1
+    }).then(response =>{ 
+      const { success, message, data } = response;
+      if (success) {
+        console.log(data);
+      } else {
+        Message.error(message);
+      }
+    });
+  }
+
   doStoryAddRemark = () => {
     API.doStoryAddRemark({
       remarkId: 1,

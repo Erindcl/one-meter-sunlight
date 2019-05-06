@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Divider, Comment, Empty, List, Pagination, Input, Modal, Row, Col } from 'antd';
+import { Button, Divider, Comment, Empty, List, Pagination, Input, Modal, Row, Col, Icon, Avatar } from 'antd';
 import moment from 'moment';
 import { connect } from "react-redux";
 import * as global from "pages/global/action";
@@ -10,6 +10,12 @@ import { message as Message } from 'antd';
 import "./style.scss";
 const confirm = Modal.confirm;
 const { TextArea } = Input;
+const IconText = ({ type, text, callback }) => (
+  <span>
+    <Icon onClick={callback} type={type} style={{ marginRight: 8 }} />
+    {text}
+  </span>
+);
 @connect(
   state => ({ ...state.global }),
   dispatch => bindActionCreators({ ...global }, dispatch)
@@ -25,6 +31,7 @@ export default class Article extends Component {
       status: 0,
       visible: false,
       password: '',
+      textareaValue: ''
     };
   }
   componentDidMount() {
@@ -79,7 +86,7 @@ export default class Article extends Component {
   getRemarkList = (ids) => {
     API.getRemarkList({
       id: ids, 
-      pageSize: 1, 
+      pageSize: 100, 
       pageNo: 1
     }).then(response =>{ 
       const { success, message, data } = response;
@@ -115,6 +122,42 @@ export default class Article extends Component {
 
   addRemark = () => {
     // 发布评论
+    const { textareaValue, id } = this.state;
+    const { userData } = this.props;
+    API.addRemark({
+      userName: userData.name,
+      userId: userData._id,
+      date: moment().format('YYYY-MM-DD HH:mm:ss'),  
+      content: textareaValue,
+      support: 0,
+      against: 0,
+      userHp: userData.headPic,
+    }).then(response =>{ 
+      const { success, message, data } = response;
+      if (success) {
+        Message.success('发布成功'); 
+        this.setState({
+          textareaValue: '',
+        });
+
+        API.doStoryAddRemark({
+          remarkId: data._id,
+          storyId: id
+        }).then(response1 =>{ 
+          this.getStoryDetail();
+        });
+
+        API.doUserAddRemark({
+          remarkId: data._id,
+          userId: userData._id // 这些id值使用数据库自动生成的那个_id的值
+        }).then(response2 =>{ 
+          this.reGetUserData();
+        });
+
+      } else {
+        Message.error(message);
+      }
+    });
   }
 
   showTextarea = () => {
@@ -135,6 +178,76 @@ export default class Article extends Component {
         console.log('Cancel');
       },
     });
+  }
+  
+  handleTextareaChange = (e) => {
+    this.setState({ textareaValue: e.target.value })
+  }
+
+  handleOperateRemark = (type, item) => {
+    switch (type) {
+      case 'support': 
+        API.supportOrAgainstRemark({
+          remarkId: item._id,
+          type: 'support'
+        }).then(response =>{ 
+          const { success, message, data } = response;
+          if (success) {
+            this.getStoryDetail();
+          } else {
+            Message.error(message);
+          }
+        });
+        break;
+      case 'against': 
+        API.supportOrAgainstRemark({
+          remarkId: item._id,
+          type: 'against'
+        }).then(response =>{ 
+          const { success, message, data } = response;
+          if (success) {
+            this.getStoryDetail();
+          } else {
+            Message.error(message);
+          }
+        });
+        break;
+      case 'delete': 
+        API.removeRemark({
+          remarkId: item._id
+        }).then(response =>{ 
+          const { success, message, data } = response;
+          if (success) {
+            
+          } else {
+            Message.error(message);
+          }
+        });
+        API.doStoryRemoveRemark({
+          remarkId: item._id,
+          storyId: this.state.id
+        }).then(response =>{ 
+          const { success, message, data } = response;
+          if (success) {
+            this.getStoryDetail();
+          } else {
+            Message.error(message);
+          }
+        });
+        API.doUserRemoveRemark({
+          remarkId: item._id,
+          userId: this.props.userData._id
+        }).then(response =>{ 
+          const { success, message, data } = response;
+          if (success) {
+            this.reGetUserData();
+          } else {
+            Message.error(message);
+          }
+        });
+        break;
+      default:;
+    }
   }
 
   // 以下皆为 支付相关
@@ -178,7 +291,7 @@ export default class Article extends Component {
   }
 
   render() {
-    const { remarkData, detailInfor, total, isTextAreaShow, status, visible, password } = this.state;
+    const { remarkData, detailInfor, total, isTextAreaShow, status, visible, password, textareaValue } = this.state;
     let realImgSrc = detailInfor.coverPic ? require(`assets/imgs/article/${detailInfor.coverPic}`) : '';
     let contentArray = [];
     if (status != 2) {
@@ -215,29 +328,41 @@ export default class Article extends Component {
             {status == 1 && <Button type="primary" disabled style={{ marginRight: 20 }}>已添加购物车</Button>}
             {status != 2 && <Button onClick={this.showNotice} type="primary">阅读更多</Button>}
           </div>
+
           <Divider orientation="left" style={{ fontSize: 20 }}>评论</Divider>
-          {isTextAreaShow && <TextArea placeholder="请输入评论" rows={5} style={{ marginBottom: '35px', padding: '10px 15px' }} />}
+
+          {isTextAreaShow && <TextArea placeholder="请输入评论" rows={5} style={{ marginBottom: '35px', padding: '10px 15px' }} value={textareaValue}  onChange={this.handleTextareaChange} />}
           <div className="reamrk-btn-box">
             {!isTextAreaShow && <Button type="primary" onClick={this.showTextarea} disabled={status != 2}>发布评论</Button>}
             {isTextAreaShow && <Button type="primary" onClick={this.addRemark}>发布</Button>}
           </div>
+
           <List
-            style={{ padding: '20px 0px' }}
+            style={{ padding: '20px 0px', width: '100%' }}
             className="comment-list"
             itemLayout="horizontal"
             dataSource={remarkData.length > 0 ?remarkData : [1]}
             renderItem={(item) => {
+              let realUrl = item.userHp ? require(`assets/imgs/user/${item.userHp}`) : '';
+              let actions = [];
+              if (item._id) {
+                actions = this.props.userData.postRemarks.indexOf(item._id) != -1 ? [<IconText type="like-o" text={item.support} callback={this.handleOperateRemark.bind(this,'support',item)} />, <IconText callback={this.handleOperateRemark.bind(this,'against',item)} type="dislike-o" text={item.against} />, <IconText callback={this.handleOperateRemark.bind(this,'delete',item)} type="delete" />] : [<IconText type="like-o" callback={this.handleOperateRemark.bind(this,'support',item)} text={item.support} />, <IconText type="dislike-o" callback={this.handleOperateRemark.bind(this,'against',item)} text={item.against} />];
+              }
               return remarkData.length > 0 ?  (
                 <Comment
-                  author={item.author}
-                  avatar={item.avatar}
+                  author={item.userName}
+                  avatar={(<Avatar
+                    src={realUrl}
+                    alt="userHeadPic"
+                  />)}
                   content={item.content}
-                  datetime={item.datetime}
+                  datetime={item.date}
+                  actions={actions}
                 />
-              ) : <Empty description={'暂无评论'} />;
+              ) : <Empty style={{ padding: '50px 0px' }} description={'暂无评论'} />;
             }}
           />
-          <Pagination style={{ marginTop: 20 }} defaultCurrent={1} total={total} />
+          {/* <Pagination style={{ marginTop: 20 }} defaultCurrent={1} total={total} /> */}
         </div>
         <Modal
           title="确认订单并支付"
