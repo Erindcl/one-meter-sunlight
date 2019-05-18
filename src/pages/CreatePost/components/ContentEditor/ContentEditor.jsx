@@ -44,16 +44,23 @@ class ContentEditor extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const SelectOption = [
-      { label: '分类1', value: 'cat1' },
-      { label: '分类2', value: 'cat2' },
-      { label: '分类3', value: 'cat3' },
+    const SelectOption = [ 
+      { label: '爱情', value: 'love' },
+      { label: '旅行', value: 'travel' },
+      { label: '友情', value: 'friend' },
+      { label: '交换人生', value: 'changeLife' },
+      { label: '相亲故事', value: 'dateStory' },
+      { label: '生活励志', value: 'motivational' },
+      { label: '亲情', value: 'family' },
+      { label: '成长', value: 'growth' },
+      { label: '糗事一箩筐', value: 'embarrass' },
+      { label: '职业', value: 'profession' }
     ];
     return (
       <div className="content-editor">
         <Form>
           <Card>
-            <h2 style={styles.title}>添加文章</h2>
+            <h2 style={styles.title}>添加故事</h2>
             <Form labelAlign="top" style={styles.form}>
               <Row>
                 <Col span="11">
@@ -63,9 +70,20 @@ class ContentEditor extends Component {
                         required: true, message: '标题必填',
                       }],
                     })(
-                      <Input size="large" placeholder="这里填写文章标题" />
+                      <Input size="large" placeholder="这里填写故事标题" />
                     )}
                   </FormItem>
+                </Col>
+                <Col span="11" offset="2">
+                  <Form.Item label="米币">
+                  {getFieldDecorator('payCorn', {
+                      rules: [{
+                        required: true, message: '米币必填',
+                      }],
+                    })(
+                      <Input size="large" placeholder="这里填写故事米币" />
+                    )}
+                  </Form.Item>
                 </Col>
               </Row>
               <Row>
@@ -112,7 +130,7 @@ class ContentEditor extends Component {
               </FormItem>
               <FormItem>
                 <Button type="primary" onClick={this.handleSubmit}>
-                  发布文章
+                  发布故事
                 </Button>
               </FormItem>
             </Form>

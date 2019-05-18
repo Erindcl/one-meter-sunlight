@@ -271,6 +271,41 @@ router.post("/pay-corn", function (req,res,next) {
   });
 });
 
+// 从购物车中移除故事
+router.post("/remove-from-shoppingcar", function (req,res,next) {
+  let storyIds = req.param("storyIds");
+  let newShoppingCar = [];
+  User.findOne({_id: req.param("userId")}, function (err,doc) {
+    if (err) {
+      res.json({
+        success: false,
+        message: err.message,
+        data: {}
+      });
+    } else {
+      newShoppingCar = doc.shoppingcar;
+      storyIds.forEach((item) => {
+        newShoppingCar.splice(newShoppingCar.indexOf(item),1);
+      });
+      User.update({_id: req.param("userId")}, {shoppingcar: newShoppingCar}, {multi: true}, function (err,doc) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message,
+            data: {}
+          });
+        } else {
+          res.json({
+            success: true,
+            message: '',
+            data: doc
+          });
+        }
+      });
+    }
+  });
+});
+
 // 故事评论添加
 router.post("/add-remark", function (req,res,next) {
   // remarkId: 1,

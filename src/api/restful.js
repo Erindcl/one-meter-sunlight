@@ -128,5 +128,9 @@ export default {
     method:'post',
     url:'/api/user/add-into-shoppingcar'
   },
+  removeFromShoppingCar:{
+    method:'post',
+    url:'/api/user/remove-from-shoppingcar'
+  },
 
 }

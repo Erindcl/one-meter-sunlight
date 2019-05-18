@@ -92,8 +92,8 @@ class EditDialog extends Component {
               )}
             </FormItem>
 
-            <FormItem label="状态：" {...formItemLayout}>
-              {getFieldDecorator('status', {
+            <FormItem label="类别：" {...formItemLayout}>
+              {getFieldDecorator('type', {
                 rules: [{
                   required: true, message: '必填选项',
                 }],

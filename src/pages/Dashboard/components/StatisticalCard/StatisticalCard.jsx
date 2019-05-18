@@ -4,27 +4,27 @@ import { Popover, Icon, Row, Col, Card } from 'antd';
 const dataSource = [
   {
     text: '昨日浏览次数',
-    number: '6,657',
+    number: '328',
     imgUrl: require('./images/TB1tlVMcgmTBuNjy1XbXXaMrVXa-140-140.png'),
-    desc: '相关说明',
+    desc: '昨日浏览次数',
   },
   {
     text: '总访问数',
-    number: '12,896',
+    number: '1,513',
     imgUrl: require('./images//TB1Py4_ceuSBuNjy1XcXXcYjFXa-142-140.png'),
-    desc: '相关说明',
+    desc: '总访问数',
   },
   {
-    text: '总订阅数',
-    number: '9,157',
+    text: '总交易数',
+    number: '256',
     imgUrl: require('./images/TB1Ni4_ceuSBuNjy1XcXXcYjFXa-142-140.png'),
-    desc: '相关说明',
+    desc: '总交易数',
   },
   {
-    text: '总收入数',
-    number: '6,682',
+    text: '总交易额',
+    number: '1,682',
     imgUrl: require('./images/TB1iFKccamWBuNjy1XaXXXCbXXa-140-140.png'),
-    desc: '相关说明',
+    desc: '总交易额',
   },
 ];
 

@@ -66,13 +66,13 @@ class SimpleFluencyForm extends Component {
               </Row>
               <Row className={'formRow'}>
                 <Col span="15">
-                  <FormItem label="缩略名称" {...formItemLayout}>
-                    {getFieldDecorator('shortName', {
+                  <FormItem label="中文名称" {...formItemLayout}>
+                    {getFieldDecorator('nameC', {
                       rules: [{
                         required: true, message: '必填项',
                       }],
                     })(
-                      <Input size="large" placeholder="请填写缩略名称" />
+                      <Input size="large" placeholder="请填写中文名称" />
                     )}
                   </FormItem>
                 </Col>

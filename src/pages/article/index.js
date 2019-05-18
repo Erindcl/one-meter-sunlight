@@ -38,10 +38,10 @@ export default class Article extends Component {
     window.scrollTo(0, 0);
     const { userData, match } = this.props;
     let status = 0;
-    if (userData.shoppingcar.indexOf(match.params.id) != -1) {
+    if (userData.shoppingcar && userData.shoppingcar.indexOf(match.params.id) != -1) {
       status = 1;
     }
-    if (userData.bought.indexOf(match.params.id) != -1) {
+    if (userData.bought && userData.bought.indexOf(match.params.id) != -1) {
       status = 2;
     }
     this.setState({ 
@@ -281,7 +281,7 @@ export default class Article extends Component {
               password: '',
               status: 2
             });
-            this.props.reGetUserData();
+            this.reGetUserData();
           } else {
             Message.error(message);
           }
@@ -308,7 +308,7 @@ export default class Article extends Component {
             <div className="title">{detailInfor.title}</div>
             <div className="des">
               <span>浏览：{detailInfor.watchCount}</span>
-              <span>评论：{detailInfor.remarkCount}</span>
+              <span>评论：{detailInfor.remarkGroup && detailInfor.remarkGroup.length}</span>
               <span>币：{detailInfor.payCorn}</span>
             </div>
             <div className="des">

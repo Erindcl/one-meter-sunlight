@@ -102,14 +102,14 @@ class EditDialog extends Component {
               )} 
             </FormItem>
 
-            <FormItem label="文章数：" {...formItemLayout}>        {getFieldDecorator('articleNum', {
+            {/* <FormItem label="文章数：" {...formItemLayout}>        {getFieldDecorator('articleNum', {
                 rules: [{
                   required: true, message: '必填选项'
                 }]
               })(
                 <Input />
               )}
-            </FormItem>
+            </FormItem> */}
 
             <FormItem label="评论数：" {...formItemLayout}>        {getFieldDecorator('commentNum', {
                 rules: [{

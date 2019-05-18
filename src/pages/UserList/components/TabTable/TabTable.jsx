@@ -41,12 +41,6 @@ export default class TabTable extends Component {
         width: 120,
       },
       {
-        title: '文章数',
-        dataIndex: 'articleNum',
-        key: 'articleNum',
-        width: 80,
-      },
-      {
         title: '评论数',
         dataIndex: 'commentNum',
         key: 'commentNum',
@@ -121,7 +115,7 @@ export default class TabTable extends Component {
     return (
       <div className="tab-table">
         <Card>
-          <Tabs onChange={this.handleTabChange}>
+          {/* <Tabs onChange={this.handleTabChange}>
             {tabs.map((item) => {
               return (
                 <TabPane tab={item.tab} key={item.key}>
@@ -129,7 +123,8 @@ export default class TabTable extends Component {
                 </TabPane>
               );
             })}
-          </Tabs>
+          </Tabs> */}
+          <Table columns={this.columns} dataSource={dataSource[tabKey]} />
         </Card>
       </div>
     );

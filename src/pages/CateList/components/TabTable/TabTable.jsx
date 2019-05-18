@@ -5,45 +5,55 @@ import DeleteBalloon from './components/DeleteBalloon';
 
 const MOCK_DATA = [
   {
-    name: '前端',
-    shortName: 'frontEnd',
-    articleNum: '2',
+    name: 'love',
+    nameC: '爱情',
+    articleNum: '15',
   },
   {
-    name: '后端',
-    shortName: 'backEnd',
-    articleNum: '3',
+    name: 'travel',
+    nameC: '旅行',
+    articleNum: '16',
   },
   {
-    name: '开发工具',
-    shortName: 'tool',
+    name: 'friend',
+    nameC: '友情',
     articleNum: '10',
   },
   {
-    name: '数据库',
-    shortName: 'database',
+    name: 'changeLife',
+    nameC: '交换人生',
     articleNum: '26',
   },
   {
-    name: '系统',
-    shortName: 'system',
+    name: 'dateStory',
+    nameC: '相亲故事',
     articleNum: '18',
   },
   {
-    name: '服务器',
-    shortName: 'server',
+    name: 'motivational',
+    nameC: '生活励志',
     articleNum: '6',
   },
   {
-    name: '框架',
-    shortName: 'framework',
+    name: 'family',
+    nameC: '亲情',
     articleNum: '39',
   },
   {
-    name: '其他',
-    shortName: 'other',
+    name: 'growth',
+    nameC: '成长',
     articleNum: '52',
   },
+  {
+    name: 'embarrass',
+    nameC: '糗事一箩筐',
+    articleNum: '21',
+  },
+  {
+    name: 'profession',
+    nameC: '职业',
+    articleNum: '28',
+  }
 ];
 
 export default class TabTable extends Component {
@@ -66,9 +76,9 @@ export default class TabTable extends Component {
         width: 150,
       },
       {
-        title: '缩写名',
-        dataIndex: 'shortName',
-        key: 'shortName',
+        title: '中文名',
+        dataIndex: 'nameC',
+        key: 'nameC',
         width: 150,
       },
       {

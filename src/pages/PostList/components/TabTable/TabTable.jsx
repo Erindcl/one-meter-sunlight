@@ -71,9 +71,9 @@ export default class TabTable extends Component {
         width: 150,
       },
       {
-        title: '状态',
-        dataIndex: 'status',
-        key: 'status',
+        title: '类别',
+        dataIndex: 'type',
+        key: 'type',
         width: 150,
       },
       {
@@ -106,7 +106,7 @@ export default class TabTable extends Component {
     return (
       <div className="tab-table">
         <Card>
-          <Tabs onChange={this.handleTabChange}>
+          {/* <Tabs onChange={this.handleTabChange}>
             {tabs.map((item) => {
               return (
                 <TabPane tab={item.tab} key={item.key}>
@@ -114,7 +114,8 @@ export default class TabTable extends Component {
                 </TabPane>
               );
             })}
-          </Tabs>
+          </Tabs> */}
+          <Table columns={columns} dataSource={dataSource[this.state.tabKey]} />
         </Card>
       </div>
     );

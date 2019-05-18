@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
 import { Row, Col, Card } from 'antd';
 import { Chart, Axis, Geom, Tooltip } from 'bizcharts';
+import moment from 'moment';
 
 const dataSource = {
   chartData: [
-    { month: '1 月', users: 38 },
-    { month: '2 月', users: 52 },
-    { month: '3 月', users: 61 },
-    { month: '4 月', users: 115 },
-    { month: '5 月', users: 48 },
-    { month: '6 月', users: 38 },
-    { month: '7 月', users: 48 },
-    { month: '8 月', users: 58 },
-    { month: '9 月', users: 68 },
-    { month: '10 月', users: 88 },
-    { month: '11 月', users: 98 },
-    { month: '12 月', users: 68 },
+    { month: moment().subtract(6, 'days').format('MM-DD'), users: 44 },
+    { month: moment().subtract(5, 'days').format('MM-DD'), users: 29 },
+    { month: moment().subtract(4, 'days').format('MM-DD'), users: 61 },
+    { month: moment().subtract(3, 'days').format('MM-DD'), users: 24 },
+    { month: moment().subtract(2, 'days').format('MM-DD'), users: 48 },
+    { month: moment().subtract(1, 'days').format('MM-DD'), users: 38 },
+    { month: moment().format('MM-DD'), users: 22 }
   ],
   statisticData: [
     {
       name: '今日注册',
-      value: '12678',
+      value: '14',
       img: {
         width: 35,
         height: 32,
@@ -29,7 +25,7 @@ const dataSource = {
     },
     {
       name: '今日登录',
-      value: '22139',
+      value: '19',
       img: {
         width: 30,
         height: 31,
@@ -37,8 +33,8 @@ const dataSource = {
       },
     },
     {
-      name: '今日订阅',
-      value: '35623',
+      name: '今日交易',
+      value: '20',
       img: {
         width: 28,
         height: 27,
@@ -47,7 +43,7 @@ const dataSource = {
     },
     {
       name: '今日评论',
-      value: '16826',
+      value: '11',
       img: {
         width: 28,
         height: 26,

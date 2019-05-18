@@ -82,7 +82,7 @@ class UserForm extends Component {
                 </Col>
               </Row>
 
-              <Row style={styles.formItem}>
+              {/* <Row style={styles.formItem}>
                 <Col span="15">
                   <FormItem label="昵称：" {...formItemLayout}>
                     {getFieldDecorator('displayName', {
@@ -94,7 +94,7 @@ class UserForm extends Component {
                     )}
                   </FormItem>
                 </Col>
-              </Row>
+              </Row> */}
 
               <Row style={styles.formItem}>
                 <Col span="15">
@@ -120,14 +120,14 @@ class UserForm extends Component {
                     })(
                       <Select size="large" placeholder="请选择用户组">
                         <Option value="administrator">管理员</Option>
-                        <Option value="contributor">投稿者</Option>
+                        <Option value="contributor">普通用户</Option>
                       </Select>
                     )}
                   </FormItem>
                 </Col>
               </Row>
 
-              <Row style={styles.formItem}>
+              {/* <Row style={styles.formItem}>
                 <Col span="15">
                   <FormItem label="状态：" {...formItemLayout}>
                     {getFieldDecorator('userState', {
@@ -143,7 +143,7 @@ class UserForm extends Component {
                     )}
                   </FormItem>
                 </Col>
-              </Row>
+              </Row> */}
 
               <Row style={styles.formItem}>
                 <Col span="15">

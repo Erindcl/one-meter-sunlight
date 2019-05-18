@@ -13,12 +13,12 @@ const asideMenuConfig = [
     ],
   },
   {
-    name: '文章管理',
+    name: '故事管理',
     path: '/post',
     icon: 'copy',
     children: [
-      { name: '文章列表', path: '/post/list' },
-      { name: '添加文章', path: '/post/create' },
+      { name: '故事列表', path: '/post/list' },
+      { name: '添加故事', path: '/post/create' },
     ],
   },
   {
@@ -37,7 +37,6 @@ const asideMenuConfig = [
     children: [
       { name: '用户列表', path: '/users/list' },
       { name: '添加用户', path: '/users/create' },
-      { name: '修改密码', path: '/users/pwd' },
     ],
   },
   {
@@ -45,7 +44,7 @@ const asideMenuConfig = [
     path: '/setting',
     icon: 'setting',
     children: [
-      { name: '基础设置', path: '/setting/basic' }
+      { name: '密码修改', path: '/setting/basic' }
     ],
   },
 ];

@@ -24,7 +24,7 @@ export default class RealTimeStatistics extends Component {
                 <span style={styles.tag}>实时</span>
               </div>
               <div style={styles.itemContent}>
-                <h2 style={styles.itemNum}>7,993</h2>
+                <h2 style={styles.itemNum}>16</h2>
                 <div style={styles.itemMeta}>
                   <p style={styles.desc}>当前分类总记录数</p>
                 </div>
@@ -34,13 +34,13 @@ export default class RealTimeStatistics extends Component {
           <Col span={6} style={styles.paddingBoth}>
             <div style={{ ...styles.itemBody, ...styles.orange }}>
               <div style={styles.itemTitle}>
-                <p style={styles.titleText}>附件统计</p>
+                <p style={styles.titleText}>交易统计</p>
                 <span style={styles.tag}>实时</span>
               </div>
               <div style={styles.itemContent}>
-                <h2 style={styles.itemNum}>3,112</h2>
+                <h2 style={styles.itemNum}>246</h2>
                 <div style={styles.itemMeta}>
-                  <p style={styles.desc}>当前上传的附件数</p>
+                  <p style={styles.desc}>当前完成的交易数</p>
                 </div>
               </div>
             </div>
@@ -48,17 +48,17 @@ export default class RealTimeStatistics extends Component {
           <Col span={6} style={styles.paddingBoth}>
             <div style={{ ...styles.itemBody, ...styles.green }}>
               <div style={styles.itemTitle}>
-                <p style={styles.titleText}>文章统计</p>
+                <p style={styles.titleText}>故事统计</p>
                 <span style={styles.tag}>实时</span>
               </div>
               <div style={styles.itemRow}>
                 <div style={styles.itemCol}>
-                  <h2 style={styles.itemNum}>908</h2>
-                  <p style={styles.desc}>评论次数</p>
+                  <h2 style={styles.itemNum}>120</h2>
+                  <p style={styles.desc}>上新总数</p>
                 </div>
                 <div style={styles.itemCol}>
-                  <h2 style={styles.itemNum}>263</h2>
-                  <p style={styles.desc}>点赞次数</p>
+                  <h2 style={styles.itemNum}>141</h2>
+                  <p style={styles.desc}>加入购物车数</p>
                 </div>
               </div>
             </div>
@@ -66,13 +66,13 @@ export default class RealTimeStatistics extends Component {
           <Col span={6} style={styles.paddingJustLeft}>
             <div style={{ ...styles.itemBody, ...styles.lightRed }}>
               <div style={styles.itemTitle}>
-                <p style={styles.titleText}>新闻统计</p>
+                <p style={styles.titleText}>评论统计</p>
                 <span style={styles.tag}>实时</span>
               </div>
               <div style={styles.itemRow}>
                 <div style={styles.itemCol}>
-                  <h2 style={styles.itemNum}>908</h2>
-                  <p style={styles.desc}>评论次数</p>
+                  <h2 style={styles.itemNum}>207</h2>
+                  <p style={styles.desc}>评论总次数</p>
                 </div>
                 <div style={styles.itemCol}>
                   <h2 style={styles.itemNum}>263</h2>

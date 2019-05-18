@@ -82,8 +82,8 @@ class EditDialog extends Component {
               )}
             </FormItem>
 
-            <FormItem label="缩写名：" {...formItemLayout}>
-              {getFieldDecorator('shortName', {
+            <FormItem label="中文名：" {...formItemLayout}>
+              {getFieldDecorator('nameC', {
                 rules: [{
                   required: true, message: '必填选项',
                 }],
@@ -98,7 +98,7 @@ class EditDialog extends Component {
                   required: true, message: '必填选项',
                 }],
               })(
-                <Input />
+                <Input disabled />
               )}
             </FormItem>
           </Form>

@@ -55,7 +55,9 @@ export default class PaiedStory extends Component {
             style={index == 0 ? {} : { marginTop: 16 }}
             type="inner"
             title={`订单编号：${parseInt((Math.random() + 1) * Math.pow(10,11-1))}`}
-            extra={<a href={`/all/${item._id}`}>查看</a>}
+            extra={<span>
+              <a href={`/all/${item._id}`}>查看</a>
+            </span>}
           >
             <div className="story-item-box">
               <div className="img-box">

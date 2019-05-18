@@ -90,6 +90,31 @@ export default class ShopCar extends Component {
     });
   }
 
+  handleDeleteBtnClick = () => { // 删除选中
+    let ids = [];
+    const { checkedIds, storyData } = this.state;
+    storyData.forEach((item) => {
+      if (checkedIds.indexOf(item.id) != -1) {
+        ids.push(item._id);
+      }
+    })
+    API.removeFromShoppingCar({
+      userId: this.props.userData._id,
+      storyIds: ids
+    }).then(response =>{ 
+      const { success, message } = response;
+      if (success) {
+        Message.success('移除成功');
+        this.props.reGetUserData();
+        this.setState({
+          checkedIds: []
+        })
+      } else {
+        Message.error(message);
+      }
+    });
+  }
+
   handleOk = (e) => {
     const { password, orderDetails } = this.state;
     if (password == '') {
@@ -148,7 +173,8 @@ export default class ShopCar extends Component {
           <div className="btn-box">
             {storyData.length != checkedIds.length && <Button type="primary" onClick={this.handleSelectAll.bind(this, 'all')} style={{ marginRight: '10px' }}>全选</Button>}
             {storyData.length == checkedIds.length && <Button type="primary" onClick={this.handleSelectAll.bind(this, 'cancel')} style={{ marginRight: '10px' }}>取消全选</Button>}
-            <Button type="primary" onClick={this.handlePayBtnClick} disabled={checkedIds.length > 0 ? false : true}>购买</Button>
+            <Button type="primary" onClick={this.handlePayBtnClick} disabled={checkedIds.length > 0 ? false : true} style={{ marginRight: '10px' }}>购买</Button>
+            <Button type="primary" onClick={this.handleDeleteBtnClick} disabled={checkedIds.length > 0 ? false : true}>移除</Button>
           </div>
           <Pagination current={pageNo} onChange={this.handlePageChange} total={total} pageSize={pageSize} />
         </dvi>}

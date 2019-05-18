@@ -15,15 +15,7 @@ export default class FooterPage extends PureComponent {
             <Logo />
           </div>
           <div className="copyright">
-            © 2018 Theme designed by{' '}
-            <a
-              href="##"
-              target="_blank"
-              className="copyright-link"
-              rel="noopener noreferrer"
-            >
-              kangroo
-            </a>
+            © 2018 Theme designed by ZhiFei
           </div>
         </div>
       </Footer>
