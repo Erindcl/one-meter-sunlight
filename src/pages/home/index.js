@@ -65,7 +65,7 @@ export default class Home extends Component {
 
   redirectToPath = (param) => {
     // console.log(this.props)
-    if (!param) {
+    if (param == 'all') {
       this.props.history.push('/all');
     } else {
       this.props.history.push(`/all/${param._id}`);
@@ -81,7 +81,7 @@ export default class Home extends Component {
           <div className="welcome-box">
             <h3>愿你在这能找到</h3>
             <h1>那温暖你心房的一米阳光</h1>
-            <Button className="btn" type="primary" onClick={this.redirectToPath}>探索更多</Button>
+            <Button className="btn" type="primary" onClick={this.redirectToPath.bind(this,'all')}>探索更多</Button>
           </div>
         </div>
         <div className="found-part">

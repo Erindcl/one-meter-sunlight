@@ -37,7 +37,7 @@ export default class NoteList extends Component {
                 >
                   <Meta
                     title={item.title}
-                    description={`浏览:${item.watchCount}  评论:${item.remarkCount}  币:${item.payCorn}`}
+                    description={`浏览:${item.watchCount}  评论:${item.remarkGroup && item.remarkGroup.length}  币:${item.payCorn}`}
                   />
                 </Card>
               </Col>

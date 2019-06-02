@@ -22,7 +22,7 @@ export default class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: '1'
+      activeKey: '0'
     };
   }
   componentDidMount() {

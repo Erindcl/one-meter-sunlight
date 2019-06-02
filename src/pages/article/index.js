@@ -292,10 +292,24 @@ export default class Article extends Component {
 
   render() {
     const { remarkData, detailInfor, total, isTextAreaShow, status, visible, password, textareaValue } = this.state;
+    
+    const { userData, match } = this.props;
+    let firstStatus = 0;
+    if (userData.shoppingcar && userData.shoppingcar.indexOf(match.params.id) != -1) {
+      firstStatus = 1;
+    }
+    if (userData.bought && userData.bought.indexOf(match.params.id) != -1) {
+      firstStatus = 2;
+    }
+
     let realImgSrc = detailInfor.coverPic ? require(`assets/imgs/article/${detailInfor.coverPic}`) : '';
     let contentArray = [];
     if (status != 2) {
-      contentArray = detailInfor.contentPart ? detailInfor.contentPart.split('\n') : [];
+      if (firstStatus == 2) {
+        contentArray = detailInfor.contentAll ? detailInfor.contentAll.split('\n') : [];
+      } else {
+        contentArray = detailInfor.contentPart ? detailInfor.contentPart.split('\n') : [];
+      }
     } else {
       contentArray = detailInfor.contentAll ? detailInfor.contentAll.split('\n') : [];
     }
@@ -323,17 +337,17 @@ export default class Article extends Component {
               <p key={index}>{item}</p>
             ))}
           </div>
-          <div className="btn-box">
+          {firstStatus != 2 && <div className="btn-box">
             {status == 0 && <Button type="primary" style={{ marginRight: 20 }} onClick={this.addIntoShoppingCar}>添加购物车</Button>}
             {status == 1 && <Button type="primary" disabled style={{ marginRight: 20 }}>已添加购物车</Button>}
             {status != 2 && <Button onClick={this.showNotice} type="primary">阅读更多</Button>}
-          </div>
+          </div>}
 
           <Divider orientation="left" style={{ fontSize: 20 }}>评论</Divider>
 
           {isTextAreaShow && <TextArea placeholder="请输入评论" rows={5} style={{ marginBottom: '35px', padding: '10px 15px' }} value={textareaValue}  onChange={this.handleTextareaChange} />}
           <div className="reamrk-btn-box">
-            {!isTextAreaShow && <Button type="primary" onClick={this.showTextarea} disabled={status != 2}>发布评论</Button>}
+            {!isTextAreaShow && <Button type="primary" onClick={this.showTextarea} disabled={status != 2 && firstStatus != 2}>发布评论</Button>}
             {isTextAreaShow && <Button type="primary" onClick={this.addRemark}>发布</Button>}
           </div>
 
